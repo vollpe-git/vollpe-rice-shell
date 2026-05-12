@@ -1,0 +1,91 @@
+/* @import 'colors.css'; */
+
+* {
+    font-family: "Monocraft";
+	box-shadow: none;
+	border: none;
+	border-color: transparent;
+	border-width: 0px;
+	outline: none;
+}
+
+window {
+	background-color: rgba(12, 12, 12, 0.9);
+}
+
+button {
+	
+    color: #FFFFFF;
+	background-color: #1E1E1E;
+    font-size:24px;
+	border: none;
+
+    margin:  120px 0px;
+
+    background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+
+	padding: 0px;
+
+	background-color: #8a53a4;/*#f687a7;*/
+    opacity: 0.8;
+    border-radius: 0px;
+    transition: 0.15s ease-in-out all;
+}
+
+button:hover, button:focus {
+    background-size: 120%;
+    background-color: #ca81c7;
+    margin: 75px 0px;
+    border-radius: 50px;
+	border: none;
+}
+
+/* 
+----------------------------------------------------- 
+Buttons
+----------------------------------------------------- 
+*/
+
+#lock {
+    border-radius: 50px 0px 0px 50px;
+}
+#lock:hover, #lock:focus {
+    border-radius: 50px;
+}
+#reboot {
+    border-radius: 0px 50px 50px 0px;
+}
+#reboot:hover, #reboot:focus {
+    border-radius: 50px;
+}
+
+#lock {
+    background-image: image(url("icons/lock.png"));
+	padding: 0px 40px;
+}
+
+#logout {
+    background-image: image(url("icons/logout.png"));
+	padding: 0px 24px;
+}
+
+#suspend {
+    background-image: image(url("icons/suspend.png"));
+	padding: 0px 16px;
+}
+
+#hibernate {
+    background-image: image(url("icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("icons/shutdown.png"));
+	padding: 0px 8px;
+}
+
+#reboot {
+    background-image: image(url("icons/reboot.png"));
+	padding: 0px 24px;
+}

@@ -1,0 +1,17 @@
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import Quickshell
+import Quickshell.Io
+import qs.services
+import qs.widgets
+
+PopupPanel {
+    id: nwroot
+    x: 300
+    y: 300
+    implicitWidth: Screen.width / 3
+    implicitHeight: Screen.height - (Screen.height / 5)
+    visible: Global.networkPopupActive
+    ListView {}
+}

@@ -1,0 +1,219 @@
+[Warn  - 9:22:51 PM] Registration of file updates failed, will miss file changes from outside the editor.-32603 Request client/registerCapability failed with message: No feature implementation for workspace.didChangeWatchedFiles found. Registration failed.
+[Error - 9:27:25 PM] Request textDocument/formatting failed.
+  Message: Cannot format invalid documents!
+  Code: 0 
+[Error - 9:28:09 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Error - 9:29:43 PM] Request textDocument/formatting failed.
+  Message: Cannot format invalid documents!
+  Code: 0 
+[Error - 10:29:39 PM] Request textDocument/documentSymbol failed.
+TypeError: Cannot read properties of undefined (reading 'range')
+	at Mt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72279)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.$t [as asSymbolInformations] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:71912)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56134)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:29:39 PM] Request textDocument/documentSymbol failed.
+TypeError: Cannot read properties of undefined (reading 'range')
+	at Mt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72279)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.$t [as asSymbolInformations] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:71912)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56134)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:38:38 PM] Request textDocument/formatting failed.
+  Message: Cannot format invalid documents!
+  Code: 0 
+[Error - 10:38:40 PM] Request textDocument/formatting failed.
+  Message: Cannot format invalid documents!
+  Code: 0 
+[Error - 10:38:42 PM] Request textDocument/formatting failed.
+  Message: Cannot format invalid documents!
+  Code: 0 
+[Error - 10:39:04 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:04 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:05 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:05 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at runNextTicks (node:internal/process/task_queues:64:5)
+	at process.processImmediate (node:internal/timers:452:9)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:05 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:05 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at runNextTicks (node:internal/process/task_queues:64:5)
+	at process.processImmediate (node:internal/timers:452:9)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:06 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:06 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:06 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:07 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:07 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:07 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:07 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:08 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)
+[Error - 10:39:08 PM] Request textDocument/documentSymbol failed.
+Error: selectionRange must be contained in fullRange
+	at Fr.validate (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36474)
+	at new Fr (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:497:36682)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72644)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at Xt (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72824)
+	at s (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46799)
+	at Object.Ebe [as map] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:46885)
+	at Object.cr [as asDocumentSymbols] (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:82:72611)
+	at u (/home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal/out/extension.js:86:56080)
+	at async i.provideDocumentSymbols (file:///usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:529:129774)

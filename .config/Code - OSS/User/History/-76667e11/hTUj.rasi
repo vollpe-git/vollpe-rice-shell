@@ -1,0 +1,7 @@
+* {
+    bg: #ff7ef6;
+    bg-alt:;
+    fg:;
+    fg-alt:;
+    background-color: @bg;
+}

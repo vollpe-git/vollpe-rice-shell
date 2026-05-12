@@ -1,0 +1,14 @@
+[Added Associations]
+image/jpeg=gwenview-6.desktop;
+image/png=gwenview-7.desktop;gwenview-5.desktop;gwenview-4.desktop;gwenview-3.desktop;gwenview-2.desktop;gwenview.desktop;
+text/plain=gedit-6.desktop;gedit-5.desktop;gedit-4.desktop;gedit-3.desktop;gedit-2.desktop;gedit.desktop;
+
+[Default Applications]
+application/x-pka=CiscoPacketTracer-9.0.0.desktop
+application/x-pksz=CiscoPacketTracer-9.0.0.desktop
+application/x-pkt=CiscoPacketTracer-9.0.0.desktop
+application/x-pkz=CiscoPacketTracer-9.0.0.desktop
+image/jpeg=gwenview-6.desktop;
+image/png=gwenview-7.desktop;
+text/plain=gedit-6.desktop;
+x-scheme-handler/pttp=CiscoPacketTracerPtsa-9.0.0.desktop

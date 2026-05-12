@@ -1,0 +1,14 @@
+2026-05-07 19:04:04.547 [info] [project] Creating project:/home/vollpe/.config/quickshell
+2026-05-07 19:04:04.547 [info] [qmlls] Fetching release information
+2026-05-07 19:04:04.843 [info] [qmlls] Status Check: Found, but not executable
+2026-05-07 19:04:09.335 [info] [qmlls] Updating QML language server
+2026-05-07 19:04:09.335 [info] [qmlls] Stopping QML language server to install new version
+2026-05-07 19:04:09.340 [info] [qmlls] Installing: qmlls-ubuntu-nightly-0.7.zip, 0.7
+2026-05-07 19:04:09.340 [info] [installer.ts] Downloading from: https://github.com/TheQtCompanyRnD/qmlls-workflow/releases/download/0.7/qmlls-ubuntu-nightly-0.7.zip
+2026-05-07 19:04:12.242 [info] [installer.ts] Unzipping to: /home/vollpe/.local/share/qmlls/files
+2026-05-07 19:04:12.444 [info] [installer.ts] QML language server installed to: /home/vollpe/.local/share/qmlls/files/qmlls
+2026-05-07 19:04:12.467 [info] [qmlls] Installation done
+2026-05-07 19:04:12.467 [info] [qmlls] Starting QML Language Server with:
+2026-05-07 19:04:12.485 [info] [qmlls] QML Language Server started for quickshell /usr/bin/qmlls6
+2026-05-07 21:08:55.615 [info] [extension] Deactivating qt-qml
+2026-05-07 21:08:55.615 [info] [project] Disposing project:/home/vollpe/.config/quickshell

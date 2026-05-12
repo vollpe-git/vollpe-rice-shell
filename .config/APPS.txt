@@ -1,0 +1,8 @@
+text = gedit
+images = gwenview
+codes = code
+files = dolphin
+bar = waybar
+power menu = wlogout
+app launcher = rofi
+network managing = nmtui

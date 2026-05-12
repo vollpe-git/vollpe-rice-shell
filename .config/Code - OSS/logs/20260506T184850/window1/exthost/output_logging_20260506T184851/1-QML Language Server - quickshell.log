@@ -1,0 +1,38 @@
+[Warn  - 9:34:28 PM] Registration of file updates failed, will miss file changes from outside the editor.-32603 Request client/registerCapability failed with message: No feature implementation for workspace.didChangeWatchedFiles found. Registration failed.
+[Error - 9:37:15 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Error - 9:37:15 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Error - 9:37:16 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Error - 9:37:17 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Error - 9:37:18 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Error - 9:37:18 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Error - 9:37:18 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Error - 9:37:19 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Error - 10:09:15 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Error - 10:09:15 PM] Request textDocument/definition failed.
+  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
+  Code: 0 
+[Info  - 10:16:15 PM] Connection to server got closed. Server will restart.
+true
+[Error - 10:16:15 PM] Server process exited with signal SIGSEGV.
+[Warn  - 10:16:15 PM] Registration of file updates failed, will miss file changes from outside the editor.-32603 Request client/registerCapability failed with message: No feature implementation for workspace.didChangeWatchedFiles found. Registration failed.
+[Error - 10:40:36 PM] Request textDocument/formatting failed.
+  Message: Cannot format invalid documents!
+  Code: 0 

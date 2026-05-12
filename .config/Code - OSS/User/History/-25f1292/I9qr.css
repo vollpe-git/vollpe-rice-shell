@@ -1,0 +1,145 @@
+/* @import 'colors.css'; */
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+	box-shadow: none;
+}
+
+flowboxchild {
+    min-width: 200px;
+    min-height: 200px;
+
+    max-width: 200px;
+    max-height: 200px;
+}
+
+window {
+	background-color: rgba(12, 12, 12, 0.9);
+}
+
+button {
+	
+    color: #FFFFFF;
+	background-color: #1E1E1E;
+    font-size:23px;
+	border-color: #f787a7;
+	border-width: 1px;
+
+    margin:  120px 0px;
+
+    background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+
+	background-color: #8a53a4;/*#f687a7;*/
+    opacity: 0.8;
+    border: none;
+    border-radius: 0px;
+    transition: 0.15s ease-in-out all;
+}
+
+button:hover, button:focus {
+    background-size: 120%;
+    background-color: #ca81c7;
+    margin: 75px 0px;
+    border-radius: 50px;
+}
+
+/* 
+----------------------------------------------------- 
+Buttons
+----------------------------------------------------- 
+*/
+
+#lock {
+    border-radius: 50px 0px 0px 50px;
+}
+#lock:hover, #lock:focus {
+    border-radius: 50px;
+}
+#reboot {
+    border-radius: 0px 50px 50px 0px;
+}
+#reboot:hover, #reboot:focus {
+    border-radius: 50px;
+}
+
+#lock {
+    background-image: image(url("icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("icons/reboot.png"));
+}
+
+
+/*
+
+* {
+	background-image: none;
+	box-shadow: none;
+}
+
+window {
+	background-color: rgba(12, 12, 12, 0.9);
+}
+
+button {
+    border-radius: 50px;
+    border-color: black;
+	text-decoration-color: #FFFFFF;
+    color: #FFFFFF;
+	background-color: #1E1E1E;
+	border-style: solid;
+	border-width: 1px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25%;
+}
+
+button:focus, button:active, button:hover {
+	background-color: #3700B3;
+	outline-style: none;
+}
+
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+}
+
+*/

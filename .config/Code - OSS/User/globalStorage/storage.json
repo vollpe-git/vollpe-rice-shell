@@ -1,0 +1,97 @@
+{
+    "telemetry.sqmId": "",
+    "telemetry.machineId": "3bc4c5295bc1477253482fc85f3280cca4197fd23061b2aec01bfd6245eea017",
+    "telemetry.devDeviceId": "ecd9ee48-5cdc-488d-9649-c85876627334",
+    "backupWorkspaces": {
+        "workspaces": [],
+        "folders": [
+            {
+                "folderUri": "file:///home/vollpe/.config/quickshell"
+            }
+        ],
+        "emptyWindows": []
+    },
+    "windowControlHeight": 35,
+    "profileAssociations": {
+        "workspaces": {
+            "file:///home/vollpe/.config": "__default__profile__",
+            "file:///home/vollpe/.config/hypr": "__default__profile__",
+            "file:///home/vollpe/.config/waybar": "__default__profile__",
+            "file:///home/vollpe/scuola/tps/waitpid": "__default__profile__",
+            "file:///home/vollpe/.config/quickshell": "__default__profile__"
+        },
+        "emptyWindows": {}
+    },
+    "windowsState": {
+        "lastActiveWindow": {
+            "folder": "file:///home/vollpe/.config/quickshell",
+            "backupPath": "/home/vollpe/.config/Code - OSS/Backups/a4422bfe07cf252772d342afb96d7054",
+            "uiState": {
+                "mode": 0,
+                "x": 0,
+                "y": 0,
+                "width": 1920,
+                "height": 1080
+            }
+        },
+        "openedWindows": []
+    },
+    "theme": "vs-dark",
+    "themeBackground": "#121314",
+    "windowSplash": {
+        "zoomLevel": 0,
+        "baseTheme": "vs-dark",
+        "colorInfo": {
+            "foreground": "#bfbfbf",
+            "background": "#121314",
+            "editorBackground": "#121314",
+            "titleBarBackground": "#191a1b",
+            "titleBarBorder": "#2a2b2c",
+            "activityBarBackground": "#191a1b",
+            "activityBarBorder": "#2a2b2c",
+            "sideBarBackground": "#191a1b",
+            "sideBarBorder": "#2a2b2c",
+            "statusBarBackground": "#191a1b",
+            "statusBarBorder": "#2a2b2c",
+            "statusBarNoFolderBackground": "#191a1b"
+        },
+        "layoutInfo": {
+            "sideBarSide": "left",
+            "editorPartMinWidth": 220,
+            "titleBarHeight": 35,
+            "activityBarWidth": 48,
+            "sideBarWidth": 170,
+            "auxiliaryBarWidth": 0,
+            "statusBarHeight": 22,
+            "windowBorder": false
+        }
+    },
+    "windowSplashWorkspaceOverride": {
+        "layoutInfo": {
+            "sideBarWidth": 170,
+            "auxiliaryBarWidth": 170,
+            "workspaces": {
+                "26bd0a94fbf72fd02cde2482806ed73e": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": false
+                },
+                "f7bfe9c18994e70a49a9ee6730983cbe": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": true
+                },
+                "3b7ae7d26cb46bae06dac03e16cc93ea": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": false
+                },
+                "4ca01ae64d8e3508affe0e8b9f853122": {
+                    "sideBarVisible": false,
+                    "auxiliaryBarVisible": false
+                },
+                "1031803e0170947c9e1cc94b5a3e2465": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": false
+                }
+            }
+        }
+    }
+}

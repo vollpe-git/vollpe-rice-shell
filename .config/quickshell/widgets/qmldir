@@ -1,0 +1,3 @@
+module qs.widgets
+PopupPanel 1.0 PopupPanel.qml
+Slider 1.0 Slider.qml

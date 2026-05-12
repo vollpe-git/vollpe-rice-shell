@@ -1,0 +1,22 @@
+ editor.bg - Background
+ "Editor background color"
+ ───────────────────────────────────────────────────────────
+ Color: Black (terminal native)
+ 
+ Named Colors:
+  Black    Red      Green    Yellow   Blue     Magenta 
+  Cyan     Gray     DkGray   LtRed    LtGreen  LtYellw 
+  LtBlue   LtMag    LtCyan   White    Default  Reset   
+ 
+ Color Palette:
+  ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██
+  ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██
+  ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██
+  ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██
+ ───────────────────────────────────────────────────────────
+ Preview:
+  fn main() {
+    let greeting = "Hello";
+    // A comment
+    println!("{}", greeting);
+  }

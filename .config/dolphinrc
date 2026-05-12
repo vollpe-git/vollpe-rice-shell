@@ -1,0 +1,30 @@
+MenuBar=Disabled
+
+[CompactMode]
+UseSystemFont=false
+ViewFont=JetBrainsMonoNL Nerd Font Mono,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
+
+[ContentDisplay]
+DirectorySizeMode=ContentSize
+
+[DetailsMode]
+UseSystemFont=false
+ViewFont=JetBrainsMonoNL Nerd Font Mono,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
+
+[General]
+Version=202
+ViewPropsTimestamp=2025,11,30,22,1,53.854
+
+[IconsMode]
+UseSystemFont=false
+ViewFont=JetBrainsMono Nerd Font Mono,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,FreeCAD,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,glycin-svg,svgthumbnail

@@ -1,0 +1,7 @@
+2026-05-07 19:04:03.494 [info] Started local extension host with pid 62979.
+2026-05-07 19:04:03.833 [error] Extension 'ms-python.debugpy CANNOT USE these API proposals 'portsAttributes, debugVisualization, contribViewsWelcome'. You MUST start in extension development mode or use the --enable-proposed-api command line flag
+2026-05-07 19:04:03.833 [error] Extension 'ms-python.python CANNOT USE these API proposals 'contribEditorContentMenu, quickPickSortByLabel, testObserver, quickPickItemTooltip, terminalDataWriteEvent, terminalExecuteCommandEvent, codeActionAI, notebookReplDocument, notebookVariableProvider'. You MUST start in extension development mode or use the --enable-proposed-api command line flag
+2026-05-07 19:04:03.834 [error] Extension 'ms-python.vscode-python-envs CANNOT USE these API proposals 'terminalShellEnv, terminalDataWriteEvent, taskExecutionTerminal'. You MUST start in extension development mode or use the --enable-proposed-api command line flag
+2026-05-07 19:04:06.178 [info] [perf] Render performance baseline is 19ms
+2026-05-07 19:47:59.661 [warning] Overlapping semantic tokens detected at lineNumber 46, column 18
+2026-05-07 19:49:28.861 [warning] Invalid semantic tokens edit detected (previousResultId: 87, resultId: 88) at edit #0: The provided start offset 150 is outside the previous data (length 130).

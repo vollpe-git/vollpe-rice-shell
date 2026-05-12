@@ -1,0 +1,19 @@
+2026-05-05 21:21:03.832 [info] Getting Manifest... theqtcompany.qt-qml
+2026-05-05 21:21:04.193 [info] Installing extension: theqtcompany.qt-qml {"isMachineScoped":false,"installPreReleaseVersion":false,"pinned":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/vollpe/.vscode-oss/extensions/extensions.json","path":"/home/vollpe/.vscode-oss/extensions/extensions.json","scheme":"vscode-userdata"},"isBuiltin":false,"isApplicationScoped":false,"productVersion":{"version":"1.117.0","date":"2026-04-21T16:12:14-07:00"}}
+2026-05-05 21:21:04.576 [info] Getting Manifest... theqtcompany.qt-core
+2026-05-05 21:21:04.860 [info] Installing extension: theqtcompany.qt-core {"isMachineScoped":false,"installPreReleaseVersion":false,"pinned":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/vollpe/.vscode-oss/extensions/extensions.json","path":"/home/vollpe/.vscode-oss/extensions/extensions.json","scheme":"vscode-userdata"},"isBuiltin":false,"isApplicationScoped":false,"productVersion":{"version":"1.117.0","date":"2026-04-21T16:12:14-07:00"},"installGivenVersion":false,"context":{"dependecyOrPackExtensionInstall":true}}
+2026-05-05 21:21:04.904 [info] Removed the extension from removed list: theqtcompany.qt-qml
+2026-05-05 21:21:05.799 [info] Extension signature verification result for theqtcompany.qt-qml: Success. Executed: true. Duration: 331ms.
+2026-05-05 21:21:05.826 [info] Extracted extension to file:///home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal: theqtcompany.qt-qml
+2026-05-05 21:21:05.836 [info] Renamed to /home/vollpe/.vscode-oss/extensions/theqtcompany.qt-qml-1.12.0-universal
+2026-05-05 21:21:05.884 [info] Extension signature verification result for theqtcompany.qt-core: Success. Executed: true. Duration: 356ms.
+2026-05-05 21:21:06.226 [info] Extracted extension to file:///home/vollpe/.vscode-oss/extensions/theqtcompany.qt-core-1.12.0-universal: theqtcompany.qt-core
+2026-05-05 21:21:06.238 [info] Renamed to /home/vollpe/.vscode-oss/extensions/theqtcompany.qt-core-1.12.0-universal
+2026-05-05 21:21:06.258 [info] Extension installed successfully: theqtcompany.qt-qml vscode-userdata:/home/vollpe/.vscode-oss/extensions/extensions.json
+2026-05-05 21:21:06.259 [info] Extension installed successfully: theqtcompany.qt-core vscode-userdata:/home/vollpe/.vscode-oss/extensions/extensions.json
+2026-05-05 21:23:40.954 [info] Getting Manifest... usernamehw.errorlens
+2026-05-05 21:23:41.196 [info] Installing extension: usernamehw.errorlens {"isMachineScoped":false,"installPreReleaseVersion":false,"pinned":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/vollpe/.vscode-oss/extensions/extensions.json","path":"/home/vollpe/.vscode-oss/extensions/extensions.json","scheme":"vscode-userdata"},"isBuiltin":false,"isApplicationScoped":false,"productVersion":{"version":"1.117.0","date":"2026-04-21T16:12:14-07:00"}}
+2026-05-05 21:23:42.533 [info] Extension signature verification result for usernamehw.errorlens: Success. Executed: true. Duration: 618ms.
+2026-05-05 21:23:42.559 [info] Extracted extension to file:///home/vollpe/.vscode-oss/extensions/usernamehw.errorlens-3.28.0-universal: usernamehw.errorlens
+2026-05-05 21:23:42.570 [info] Renamed to /home/vollpe/.vscode-oss/extensions/usernamehw.errorlens-3.28.0-universal
+2026-05-05 21:23:42.591 [info] Extension installed successfully: usernamehw.errorlens vscode-userdata:/home/vollpe/.vscode-oss/extensions/extensions.json

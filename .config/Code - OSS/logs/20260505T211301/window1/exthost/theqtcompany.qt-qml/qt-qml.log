@@ -1,0 +1,6 @@
+2026-05-05 21:13:03.363 [info] [project] Creating project:/home/vollpe/.config/quickshell
+2026-05-05 21:13:03.364 [info] [qmlls] Fetching release information
+2026-05-05 21:13:03.668 [info] [qmlls] Status Check: Found, but not executable
+2026-05-05 21:13:07.442 [info] [extension] Deactivating qt-qml
+2026-05-05 21:13:07.442 [info] [project] Disposing project:/home/vollpe/.config/quickshell
+2026-05-05 21:13:07.442 [warning] [qmlls] Canceled

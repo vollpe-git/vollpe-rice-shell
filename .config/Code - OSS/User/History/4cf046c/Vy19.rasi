@@ -1,0 +1,138 @@
+configuration {
+  display-drun: "🔍︎";
+  font: "JetBrainsMono Nerd Font Medium 10";
+  drun-display-format: "{icon}{name}";
+  show-icons: true;
+  icon-theme: "Papirus";
+  click-to-exit: true;
+  modi: "drun,run,window";
+
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+}
+
+@theme "/dev/null"
+
+* {
+    bg0: #52327eff;//#3f2f47ce;//#8a53a42a;
+    bg1: #3e3e3e;
+    bg2: #000000d8;
+    bg3: #af7effff;
+    fg0: #ffffffff;
+    fg1: #f687a7;
+    fg2: #0095ff; //#ff7ef6;
+    fg3: #000000ff;
+    background-color: @bg2;
+    text-color: @fg0;
+}
+
+
+window {
+    location:       center;
+    //y-offset:       calc(50% - 176px);
+    width:          400px;//350;
+    border-radius:  0px;
+
+    background-color:   transparent;
+}
+
+mainbox {
+    padding:    0px;
+}
+
+inputbar {
+    margin: 15px 15px 0px 15px;
+    background-color:   #232222;
+    //border-color:       @bg1;
+
+    //border:         2px;
+    border-radius:  20px;
+
+    padding:    0px 0px 0px 16px;
+    spacing:    8px;
+    children:   [ prompt, entry ];
+}
+
+prompt {
+    text-color: @fg1;
+    background-color: transparent;
+    padding: 7px 3px 0px 0px;
+    border-radius: 20px;
+
+    font: "JetBrainsMono Nerd Font Medium 15";
+}
+
+entry {
+    placeholder:        "";
+    placeholder-color:  @fg0;
+    text-color: @fg0;
+    border-radius: 20px;
+    background-color: @bg1;
+    padding: 5px 15px;
+
+    font: "JetBrainsMono Nerd Font Medium 15";
+}
+
+message {
+    margin:             12px 0 0;
+    border-radius:      20px;
+    border-color:       @bg2;
+    background-color:   @bg2;
+}
+
+textbox {
+    padding:    8px 24px;
+}
+
+listview {
+    background-color:   transparent;
+
+    margin:     12px 0 0;
+    lines:      6;
+    columns:    1;
+
+    fixed-height: true;
+}
+
+element {
+    padding:        8px 16px;
+    spacing:        8px;
+    margin:         0px 0px;
+    border-radius:  0px;
+    background-color: transparent;
+}
+
+element normal active {
+    text-color: @fg0;
+}
+
+element alternate active {
+    text-color: @fg0;
+}
+
+element selected normal, element selected active {
+    background-color:   @fg1;
+    border: 1px solid;
+    //border-color: @fg0;
+}
+
+element-icon {
+    size:           2.5em;
+    vertical-align: 0.5;
+    background-color: transparent;
+    horizontal-align: 0.5;
+}
+
+element-text {
+    text-color: inherit;
+    vertical-align: 0.5;
+    background-color: transparent;
+    font: "JetBrainsMono Nerd Font Medium 11";
+    horizontal-align: 0.5;
+}

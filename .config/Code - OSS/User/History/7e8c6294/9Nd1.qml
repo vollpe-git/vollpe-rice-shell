@@ -1,0 +1,2 @@
+pragma singleton
+import QtQuick
