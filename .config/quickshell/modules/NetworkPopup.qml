@@ -8,7 +8,8 @@ import "../widgets"
 
 PopupPanel {
     id: nwRoot
-    x: Global.networkButtonPosition.x - implicitWidth / 2
+    x: Global.networkButtonPosition.x - implicitWidth / 2// + theme.leftBarWidth
+    // y: Global.networkPopupActive ? Global.networkButtonPosition.y : -height
     y: Global.networkButtonPosition.y
     // x: 100
     // y: 100
@@ -17,13 +18,22 @@ PopupPanel {
     readonly property real maxHeight: 800
 
     implicitHeight: Math.max(minHeight, Math.min(maxHeight, mainColumn.height))
+    Behavior on implicitHeight {
+        NumberAnimation {
+            duration: 10
+            easing.type: Easing.Linear
+        }
+    }
+
+    bindProperty: "networkPopupActive"
 
     color: "transparent"
-    visible: Global.networkPopupActive
+    // visible: Global.networkPopupActive
     Rectangle {
         anchors.fill: parent
-        color: "#ffffff"
-        radius: 50
+        color: theme.bg2
+        bottomLeftRadius: 25
+        bottomRightRadius: bottomLeftRadius
         Column {
             id: mainColumn
             width: parent.width
@@ -32,10 +42,11 @@ PopupPanel {
             Text {
                 id: title
                 width: parent.width
-                topPadding: 25
-                bottomPadding: 15
+                topPadding: 10
+                bottomPadding: 10
                 horizontalAlignment: Text.AlignHCenter
-                font.family: "JetBrainsMono Nerd Font"
+                font.family: theme.defaultFont
+                color: theme.fg
                 font.pixelSize: 16
                 text: "Networks"
             }
@@ -66,7 +77,7 @@ PopupPanel {
                             width: parent.width - 30 // Sottraiamo i margini (15+15)
                             anchors.horizontalCenter: parent.horizontalCenter
                             height: 20 // Altezza fissa o implicitHeight del RowLayout
-                            color: "#CCCCCC"
+                            color: theme.bg
                             radius: 10
 
                             RowLayout {
@@ -79,18 +90,28 @@ PopupPanel {
                                     text: modelData.name
                                     Layout.fillWidth: true
                                     font.bold: true
+                                    font.family: theme.defaultFont
+                                    color: theme.fg
                                 }
 
                                 Text {
                                     text: modelData.type == 1 ? "WiFi" : (modelData.type == 2 ? "Wired" : "None")
-                                    color: "#555555"
+                                    color: theme.fgOff
                                     font.pixelSize: 11
                                 }
 
                                 // Icona o testo per indicare l'espansione (opzionale)
                                 Text {
-                                    text: delegateDeviceRoot.expanded ? "󰅃" : "󰅀"
+                                    text: "󰅃"
                                     font.family: "JetBrainsMono Nerd Font"
+                                    rotation: delegateDeviceRoot.expanded ? 180 : 0
+                                    color: theme.fg
+                                    Behavior on rotation {
+                                        NumberAnimation {
+                                            duration: 150
+                                            easing.type: Easing.Linear
+                                        }
+                                    }
                                 }
                             }
 
@@ -108,6 +129,12 @@ PopupPanel {
                             anchors.horizontalCenter: parent.horizontalCenter
                             // visible: delegateDeviceRoot.expanded
                             height: delegateDeviceRoot.expanded ? contentHeight : 0
+                            Behavior on height {
+                                NumberAnimation {
+                                    duration: 100
+                                    easing.type: Easing.Linear
+                                }
+                            }
                             model: modelData.networks.values
                             // interactive: false
                             spacing: 5
@@ -119,16 +146,18 @@ PopupPanel {
                                     id: nwName
                                     text: modelData.name
                                     font.pixelSize: 12
-                                    color: "#333333"
+                                    color: theme.fg
+                                    font.bold: true
                                     Layout.fillWidth: true
                                     elide: Text.ElideRight
+                                    font.family: theme.defaultFont
                                 }
                                 Rectangle {
                                     Layout.alignment: Qt.AlignRight
                                     implicitHeight: nwName.implicitHeight
                                     implicitWidth: implicitHeight
                                     radius: implicitHeight / 2
-                                    color: modelData.connected ? "#00ff00" : (modelData.state == 1 || modelData.state == 5 ? "#ffB000" : "#ff0000")
+                                    color: modelData.connected ? theme.blue1 : (modelData.state == 1 || modelData.state == 5 ? theme.yellow1 : theme.red1)
                                     MouseArea {
                                         cursorShape: Qt.PointingHandCursor
                                         anchors.fill: parent

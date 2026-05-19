@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Widgets
 import "../services"
 import "../widgets"
 
@@ -37,22 +38,30 @@ PanelWindow {
         // Se spento -> margine negativo pari alla sua altezza (nascosto sopra)
         anchors.top: parent.top
         anchors.fill: parent
+        clip: true
 
-        color: "white"
+        color: theme.bg
         bottomRightRadius: width / 10
         bottomLeftRadius: bottomRightRadius
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
             propagateComposedEvents: true
+            // preventStealing: true
             onExited: {
-                if (!notificationsView.focusedTextArea)
+                console.log(`mouseX: ${mouseX}; mouseY: ${mouseY}`);
+                // if (mouseX > 0 && mouseX < root.width && mouseY > 0 && mouseY < root.height) {
+                //     console.log(`mouseX: ${mouseX}; mouseY: ${mouseY}`)
+                //     return;
+                // }
+                if (!notificationsView.focusedTextArea && !multiManager.noClosing)
                     Global.notificationPanelActive = false;
             }
         }
         ColumnLayout {
             id: mainColumn
             anchors.fill: parent
+            spacing: 0
             RowLayout { // tabs
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -61,7 +70,17 @@ PanelWindow {
                 Rectangle {
                     implicitHeight: 30
                     Layout.preferredWidth: mainColumn.width / 4
-                    color: "black"
+                    color: Global.notificationPanelTab == 1 ? theme.bg1 : theme.bg
+                    topLeftRadius: width / 2
+                    topRightRadius: topLeftRadius
+                    Text {
+                        anchors.centerIn: parent
+                        color: theme.fg
+                        font.family: theme.defaultFont
+                        font.pixelSize: 14
+                        font.bold: Global.notificationPanelTab == 1
+                        text: "NOTIFICATIONS"
+                    }
                     MouseArea {
                         cursorShape: Qt.PointingHandCursor
                         anchors.fill: parent
@@ -71,7 +90,17 @@ PanelWindow {
                 Rectangle {
                     implicitHeight: 30
                     Layout.preferredWidth: mainColumn.width / 4
-                    color: "black"
+                    color: Global.notificationPanelTab == 2 ? theme.bg1 : theme.bg
+                    topLeftRadius: width / 2
+                    topRightRadius: topLeftRadius
+                    Text {
+                        anchors.centerIn: parent
+                        color: theme.fg
+                        font.family: theme.defaultFont
+                        font.pixelSize: 14
+                        font.bold: Global.notificationPanelTab == 2
+                        text: "MANAGING"
+                    }
                     MouseArea {
                         cursorShape: Qt.PointingHandCursor
                         anchors.fill: parent
@@ -84,9 +113,27 @@ PanelWindow {
                 // anchors.fill: parent
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                NotificationsView {
-                    id: notificationsView
-                    visible: Global.notificationPanelTab == 1
+                property int contentPadding: 10
+                Layout.leftMargin: contentPadding
+                Layout.rightMargin: contentPadding
+                Layout.bottomMargin: contentPadding
+                ClippingRectangle {
+                    // anchors.fill: parent
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+
+                    color: theme.bg1
+                    radius: notificationCenterManager.bottomLeftRadius - tabStackLayout.contentPadding
+                    clip: true
+                    NotificationsView {
+                        id: notificationsView
+                        topMargin: (notificationCenterManager.bottomLeftRadius - tabStackLayout.contentPadding) / 2
+                        visible: Global.notificationPanelTab == 1
+                    }
+                    MultiManager {
+                        id: multiManager
+                        visible: Global.notificationPanelTab == 2
+                    }
                 }
             }
         }

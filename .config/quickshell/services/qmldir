@@ -6,3 +6,4 @@ singleton Bluetooth 1.0 Bluetooth.qml
 singleton Network 1.0 Network.qml
 singleton Battery 1.0 Battery.qml
 singleton Notifications 1.0 Notifications.qml
+singleton IconMapper 1.0 IconMapper.qml

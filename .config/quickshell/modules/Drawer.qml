@@ -15,10 +15,10 @@ import qs.widgets
 import qs.modules
 
 WrapperItem {
-    BarModule {}
-    NotificationPanel {}
     FastLaunch {}
     NetworkPopup {}
     BluetoothPopup {}
+    BarModule {}
     Notes {}
+    NotificationPanel {}
 }

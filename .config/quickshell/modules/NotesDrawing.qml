@@ -8,10 +8,10 @@ import "../widgets"
 
 Item {
     id: root
-    property color backgroundColor: "#ffffff"
-    property color mainColor: "#000000"
-    property color colorOne: "#ff0000"
-    property color colorTwo: "#0000ff"
+    property color backgroundColor: theme.bg1
+    property color mainColor: theme.fg
+    property color colorOne: theme.blue1
+    property color colorTwo: theme.red1
     anchors.margins: 5
     anchors.fill: parent
     RowLayout {
@@ -23,7 +23,9 @@ Item {
             Layout.fillWidth: true
             GridLayout {
                 columns: 4
+
                 CanvasButton {
+                    border.width: canvas.brushColor == color ? 4 : 0
                     color: root.mainColor
                     MouseArea {
                         cursorShape: Qt.PointingHandCursor
@@ -32,6 +34,7 @@ Item {
                     }
                 }
                 CanvasButton {
+                    border.width: canvas.brushColor == color ? 4 : 0
                     color: root.colorOne
                     MouseArea {
                         cursorShape: Qt.PointingHandCursor
@@ -40,6 +43,7 @@ Item {
                     }
                 }
                 CanvasButton {
+                    border.width: canvas.brushColor == color ? 4 : 0
                     color: root.colorTwo
                     MouseArea {
                         cursorShape: Qt.PointingHandCursor
@@ -48,7 +52,15 @@ Item {
                     }
                 }
                 CanvasButton {
+                    border.width: canvas.brushColor == color ? 4 : 0
                     color: root.backgroundColor
+                    Text {
+                        anchors.centerIn: parent
+                        text: ""
+                        font.family: theme.defaultFont
+                        font.pixelSize: 14
+                        color: theme.fg
+                    }
                     MouseArea {
                         cursorShape: Qt.PointingHandCursor
                         anchors.fill: parent
@@ -57,6 +69,7 @@ Item {
                 }
 
                 CanvasButton {
+                    color: canvas.brushSize == 1 ? "#80000000" : theme.bg
                     Rectangle {
                         anchors.centerIn: parent
                         color: canvas.brushColor
@@ -71,6 +84,7 @@ Item {
                     }
                 }
                 CanvasButton {
+                    color: canvas.brushSize == 2 ? "#80000000" : theme.bg
                     Rectangle {
                         anchors.centerIn: parent
                         color: canvas.brushColor
@@ -85,6 +99,7 @@ Item {
                     }
                 }
                 CanvasButton {
+                    color: canvas.brushSize == 3 ? "#80000000" : theme.bg
                     Rectangle {
                         anchors.centerIn: parent
                         color: canvas.brushColor
@@ -99,6 +114,7 @@ Item {
                     }
                 }
                 CanvasButton {
+                    color: canvas.brushSize == 4 ? "#80000000" : theme.bg
                     Rectangle {
                         anchors.centerIn: parent
                         color: canvas.brushColor
@@ -113,102 +129,120 @@ Item {
                     }
                 }
             }
-            Canvas {
-                id: canvas
-                property color brushColor: "#000000"
-                property int brushSize: 1
+            Rectangle {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                renderTarget: Canvas.Image
-                renderStrategy: Canvas.Cooperative
-                property real lastX
-                property real lastY
-
-                // Array per gestire l'Undo
-                property var pathHistory: []
-
-                onPaint: {
-                    var ctx = getContext('2d');
-
-                    // Impostiamo lo stile in base alle proprietà attuali del pennello
-                    ctx.lineWidth = brushSize;
-                    ctx.strokeStyle = brushColor;
-                    ctx.lineCap = "round";
-                    ctx.lineJoin = "round";
-
-                    ctx.beginPath();
-                    ctx.moveTo(lastX, lastY);
-                    // Nota: usiamo area.mouseX invece di lastX per il punto finale
-                    ctx.lineTo(area.mouseX, area.mouseY);
-                    ctx.stroke();
-
-                    // Aggiorniamo le coordinate per il prossimo segmento
-                    lastX = area.mouseX;
-                    lastY = area.mouseY;
-                }
-
-                // function undo() {
-                //     if (pathHistory.length > 0) {
-                //         pathHistory.pop(); // Rimuove l'ultimo segmento
-
-                //         var ctx = getContext('2d');
-
-                //         // 1. Pulizia totale immediata del buffer
-                //         ctx.clearRect(0, 0, width, height);
-
-                //         // 2. Ridisegna tutto lo storico da zero
-                //         for (var i = 0; i < pathHistory.length; i++) {
-                //             var stroke = pathHistory[i];
-
-                //             ctx.beginPath();
-                //             ctx.lineWidth = stroke.size;
-                //             ctx.strokeStyle = stroke.color;
-                //             ctx.lineCap = "round";
-                //             ctx.lineJoin = "round";
-
-                //             ctx.moveTo(stroke.startX, stroke.startY);
-                //             ctx.lineTo(stroke.endX, stroke.endY);
-                //             ctx.stroke();
-                //             ctx.closePath(); // Chiudiamo esplicitamente il path
-                //         }
-
-                //         // 3. Ripristiniamo il colore selezionato per i prossimi tratti
-                //         ctx.strokeStyle = brushColor;
-                //         ctx.lineWidth = brushSize;
-
-                //         // 4. Importante: diciamo al motore di rendering di aggiornare la visualizzazione
-                //         requestPaint();
-                //     }
-                // }
-
-                function clearAll() {
-                    var ctx = getContext('2d');
-                    ctx.clearRect(0, 0, width, height);
-                    pathHistory = [];
-                    requestPaint();
-                }
-
-                MouseArea {
-                    id: area
+                color: root.backgroundColor // Mostra il colore del tema a schermo
+                clip: true
+                z: -1
+                radius: 10
+                Canvas {
+                    id: canvas
+                    property color brushColor: root.mainColor
+                    property int brushSize: 1
+                    // Layout.fillHeight: true
+                    // Layout.fillWidth: true
                     anchors.fill: parent
-                    cursorShape: Qt.CrossCursor
+                    renderTarget: Canvas.Image
+                    renderStrategy: Canvas.Cooperative
+                    property bool isEraser: brushColor == root.backgroundColor
+                    property real lastX
+                    property real lastY
 
-                    onPressed: {
-                        canvas.lastX = mouseX;
-                        canvas.lastY = mouseY;
+                    // Array per gestire l'Undo
+                    property var pathHistory: []
+
+                    onPaint: {
+                        var ctx = getContext('2d');
+
+                        // Impostiamo lo stile in base alle proprietà attuali del pennello
+                        if (isEraser) {
+                            ctx.globalCompositeOperation = "destination-out"; // Cancella i pixel rendendoli trasparenti
+                            ctx.strokeStyle = "rgba(0,0,0,1)"; // Il colore non importa, basta che l'alfa sia 1 per cancellare
+                        } else {
+                            ctx.globalCompositeOperation = "source-over"; // Modalità di disegno standard (sovrascrive)
+                            ctx.strokeStyle = brushColor;
+                        }
+
+                        ctx.lineWidth = isEraser ? brushSize * brushSize : brushSize;
+                        ctx.strokeStyle = brushColor;
+                        ctx.lineCap = "round";
+                        ctx.lineJoin = "round";
+
+                        ctx.beginPath();
+                        ctx.moveTo(lastX, lastY);
+                        // Nota: usiamo area.mouseX invece di lastX per il punto finale
+                        ctx.lineTo(area.mouseX, area.mouseY);
+                        ctx.stroke();
+
+                        // Aggiorniamo le coordinate per il prossimo segmento
+                        lastX = area.mouseX;
+                        lastY = area.mouseY;
                     }
 
-                    onPositionChanged: {
-                        // Salviamo il segmento nello storico per l'undo
-                        canvas.pathHistory.push({
-                            startX: canvas.lastX,
-                            startY: canvas.lastY,
-                            endX: mouseX,
-                            endY: mouseY,
-                            color: canvas.brushColor,
-                            size: canvas.brushSize
-                        });
-                        canvas.requestPaint();
+                    // function undo() {
+                    //     if (pathHistory.length > 0) {
+                    //         pathHistory.pop(); // Rimuove l'ultimo segmento
+
+                    //         var ctx = getContext('2d');
+
+                    //         // 1. Pulizia totale immediata del buffer
+                    //         ctx.clearRect(0, 0, width, height);
+
+                    //         // 2. Ridisegna tutto lo storico da zero
+                    //         for (var i = 0; i < pathHistory.length; i++) {
+                    //             var stroke = pathHistory[i];
+
+                    //             ctx.beginPath();
+                    //             ctx.lineWidth = stroke.size;
+                    //             ctx.strokeStyle = stroke.color;
+                    //             ctx.lineCap = "round";
+                    //             ctx.lineJoin = "round";
+
+                    //             ctx.moveTo(stroke.startX, stroke.startY);
+                    //             ctx.lineTo(stroke.endX, stroke.endY);
+                    //             ctx.stroke();
+                    //             ctx.closePath(); // Chiudiamo esplicitamente il path
+                    //         }
+
+                    //         // 3. Ripristiniamo il colore selezionato per i prossimi tratti
+                    //         ctx.strokeStyle = brushColor;
+                    //         ctx.lineWidth = brushSize;
+
+                    //         // 4. Importante: diciamo al motore di rendering di aggiornare la visualizzazione
+                    //         requestPaint();
+                    //     }
+                    // }
+
+                    function clearAll() {
+                        var ctx = getContext('2d');
+                        ctx.clearRect(0, 0, width, height);
+                        pathHistory = [];
+                        requestPaint();
+                    }
+
+                    MouseArea {
+                        id: area
+                        anchors.fill: parent
+                        cursorShape: Qt.CrossCursor
+
+                        onPressed: {
+                            canvas.lastX = mouseX;
+                            canvas.lastY = mouseY;
+                        }
+
+                        onPositionChanged: {
+                            // Salviamo il segmento nello storico per l'undo
+                            canvas.pathHistory.push({
+                                startX: canvas.lastX,
+                                startY: canvas.lastY,
+                                endX: mouseX,
+                                endY: mouseY,
+                                color: canvas.brushColor,
+                                size: canvas.brushSize
+                            });
+                            canvas.requestPaint();
+                        }
                     }
                 }
             }
@@ -218,14 +252,17 @@ Item {
             Rectangle {
                 implicitWidth: 20
                 implicitHeight: implicitWidth
-                color: "black"
+                color: theme.red1
                 // Layout.fillHeight: true
                 radius: implicitWidth / 2
+                // border.width: 1
+                // border.color: theme.red1
+                // border.pixelAligned: true
                 Text {
                     text: ""
-                    font.family: 'JetBrainsMono Nerd Font'
+                    font.family: theme.defaultFont
                     anchors.centerIn: parent
-                    color: "#ffffff"
+                    color: theme.fg4
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -235,6 +272,7 @@ Item {
             }
             MyButton {
                 icon: "" // Icona copy
+                color: theme.blue1
 
                 Process {
                     id: copyProcess
@@ -264,6 +302,7 @@ Item {
             MyButton {
                 // trash button
                 icon: ""
+                color: theme.red1
                 MouseArea {
                     cursorShape: Qt.PointingHandCursor
                     anchors.fill: parent
@@ -272,6 +311,7 @@ Item {
             }
             MyButton {
                 icon: ""
+                color: theme.magenta2
                 SystemClock {
                     id: clock
                     precision: SystemClock.Minutes
@@ -313,19 +353,24 @@ Item {
         implicitHeight: 20
         Layout.fillWidth: true
         radius: implicitHeight / 2
-        color: "#DDDDDD"
+        color: theme.bg
+        border.color: "#80000000"
+        border.width: 0
     }
     component MyButton: Rectangle {
         implicitWidth: 20
-        color: "black"
+        // color: theme.bg1
         Layout.fillHeight: true
         radius: implicitWidth / 2
         property string icon: "?"
+        property color textColor: theme.fg4
         Text {
+            font.pixelSize: 14
+            font.bold: true
             text: parent.icon
-            font.family: 'JetBrainsMono Nerd Font'
+            font.family: theme.defaultFont
             anchors.centerIn: parent
-            color: "#ffffff"
+            color: parent.textColor
         }
     }
 }

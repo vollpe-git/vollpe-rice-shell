@@ -8,6 +8,18 @@ Item {
 
     property var activePlayer: {
         if (players.length > 0) {
+            // 1. Priorità assoluta: Scelta manuale (se il player è ancora connesso)
+            if (manualPlayer !== null) {
+                // Verifichiamo che il player manuale sia ancora nella lista dei player validi
+                if (players.includes(manualPlayer)) {
+                    return manualPlayer;
+                } else {
+                    // Se il player manuale è stato chiuso, resettiamo e torniamo all'automatismo
+                    manualPlayer = null;
+                }
+            }
+
+            // 2. Automatismo (il tuo codice originale)
             for (let plap of players) {
                 if (plap.playbackState === MprisPlaybackState.Playing)
                     return plap;
@@ -23,6 +35,20 @@ Item {
         }
         return null;
     }
+
+    property var manualPlayer: null
+
+    function setManualPlayer(player) {
+        // Se passiamo lo stesso player già attivo manualmente, resettiamo all'automatismo
+        if (manualPlayer === player) {
+            manualPlayer = null;
+        } else {
+            if (root.activePlayer.isPlaying)
+                togglePlay();
+            manualPlayer = player;
+        }
+    }
+
     property var players: Mpris.players.values
     property var cover: activePlayer ? activePlayer.trackArtUrl : null
     property string artist: activePlayer ? (activePlayer.trackArtist || "unknown") : null
@@ -38,6 +64,7 @@ Item {
     property real length: activePlayer ? (activePlayer.lengthSupported ? activePlayer.length : 0) : null
     property real position: activePlayer ? (activePlayer.positionSupported ? activePlayer.position : 0) : null
     Timer {
+        id: timeTimer
         interval: 1000
         running: root.activePlayer && root.activePlayer.playbackState === MprisPlaybackState.Playing
         repeat: true
@@ -93,9 +120,9 @@ Item {
 
         // Logica di switch tra gli stati MPRIS standard
         if (root.loop == MprisLoopState.None) {
-            activePlayer.loopState = MprisLoopState.Track;
-        } else if (root.loop == MprisLoopState.Track) {
             activePlayer.loopState = MprisLoopState.Playlist;
+        } else if (root.loop == MprisLoopState.Playlist) {
+            activePlayer.loopState = MprisLoopState.Track;
         } else {
             activePlayer.loopState = MprisLoopState.None;
         }
@@ -116,10 +143,19 @@ Item {
             activePlayer.togglePlaying();
     }
 
-    // onActivePlayerChanged: {
-    //     console.log(`active player: ${root.activePlayer?.identity}`);
-    //     // debugPlayer(root.players[1]);
-    // }
+    // Definisci il segnale. Puoi anche passargli il nuovo player come argomento
+
+    onActivePlayerChanged: {
+        if (activePlayer && activePlayer.playbackState === MprisPlaybackState.Playing) {
+            root.position = root.activePlayer.position;
+            timeTimer.restart();
+        } else {
+            root.position = 0;
+            timeTimer.stop();
+        }
+        if (!activePlayer.isPlaying)
+            togglePlay();
+    }
 
     // onPlayersChanged: {
     //     let toPrint = "";

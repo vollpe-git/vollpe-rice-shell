@@ -15,33 +15,36 @@ import qs.modules
 
 WrapperItem {
     id: root
-    Component.onCompleted: {
-        console.log("Inizializzo notifiche. Conteggio attuale: " + Notifications.notifications.values.lenght); // to wake up the notifications singleton
-    }
+
+    property int interModuleSpacing: 20
+
+    // Component.onCompleted: {
+    //     console.log("Inizializzo notifiche. Conteggio attuale: " + Notifications.notifications.values.lenght); // to wake up the notifications singleton
+    // }
 
     anchors {
         top: parent.top
         right: parent.right
         left: parent.left
-        horizontalCenter: parent.horizontalCenter
+        // horizontalCenter: parent.horizontalCenter
     }
 
     component TextChildIcon: Text {
-        font.family: "JetBrainsMono Nerd Font"
+        font.family: theme.defaultFont
         font.pixelSize: 12
         color: "white"
         // Layout.preferredWidth: 20
         // Puoi aggiungere qui tutto quello che vuoi sia comune
     }
     component TextChildInfo: Text {
-        font.family: "JetBrainsMono Nerd Font"
+        font.family: theme.defaultFont
         font.pixelSize: 10
         color: "white"
         Layout.preferredWidth: 40
         // Puoi aggiungere qui tutto quello che vuoi sia comune
     }
     component MediaControlIcon: Text {
-        font.family: "JetBrainsMono Nerd Font"
+        font.family: theme.defaultFont
         font.pixelSize: 10
         // color: "black"
     }
@@ -50,23 +53,48 @@ WrapperItem {
         anchors.top: true
         anchors.left: true
         anchors.right: true
-        height: 30
-        color: '#0Aff7ef6'
+        height: theme.barHeigth
+        color: theme.bg2
+
+        Rectangle {
+            // DA MODIFICARE
+            implicitWidth: Screen.width / 4
+            anchors.horizontalCenter: parent.horizontalCenter
+            // anchors.top: rootPanelWindow.top
+            implicitHeight: 1
+            color: "transparent"
+            z: 10
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                // Azione quando il mouse ENTRA
+                onEntered: {
+                    Global.notificationPanelActive = true;
+                }
+
+                // Azione quando il mouse ESCE
+                // onExited: {
+                //     Global.notificationPanelActive = false;
+                // }
+            }
+        }
 
         RowLayout {
             anchors.fill: parent
-            anchors.leftMargin: 10
-            anchors.rightMargin: 10
+            // anchors.leftMargin: 10
+            // anchors.rightMargin: 10
+            anchors.margins: theme.barPadding
             anchors.centerIn: parent
 
             RowLayout { // sinistra
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
-                spacing: 10
+                spacing: root.interModuleSpacing
                 Rectangle { // rofi
-                    implicitWidth: 30
-                    implicitHeight: 30
-                    radius: 15
+                    implicitHeight: parent.implicitHeight
+                    implicitWidth: implicitHeight
+                    radius: implicitHeight / 2
+                    color: theme.magenta2
 
                     Process {
                         id: rofi
@@ -78,8 +106,9 @@ WrapperItem {
                         topPadding: 3
                         anchors.centerIn: parent
                         verticalAlignment: Text.AlignVCenter
+                        font.family: theme.defaultFont
                         text: "󰭟"
-                        color: "#000000"
+                        color: theme.fg4
                         font.pixelSize: 25
                     }
 
@@ -92,8 +121,9 @@ WrapperItem {
 
                 GridLayout { // performance check
                     columns: 6
-                    rowSpacing: 0
-                    columnSpacing: 10
+                    rowSpacing: 2
+                    columnSpacing: 3
+                    Layout.fillHeight: true
 
                     // linea 1
                     TextChildIcon {
@@ -143,14 +173,15 @@ WrapperItem {
                 }
 
                 Rectangle { // most used app launcher
-                    implicitHeight: 30
+                    implicitHeight: parent.implicitHeight
                     implicitWidth: implicitHeight
                     radius: implicitHeight / 2
+                    color: theme.bg
 
                     Text {
                         anchors.centerIn: parent
                         verticalAlignment: Text.AlignVCenter
-                        color: "#000000"
+                        color: theme.fg
                         font.pixelSize: 23
                         text: "󰣇"
                     }
@@ -179,18 +210,19 @@ WrapperItem {
                 Rectangle { // media player
                     id: mediaPlayerRoot
                     property int pillInset: 4
-                    implicitHeight: 30
+                    implicitHeight: parent.implicitHeight
                     implicitWidth: 300
                     radius: height / 2
-                    color: '#ffffff'
+                    color: theme.bg
                     RowLayout {
                         anchors.fill: parent
                         implicitHeight: mediaPlayerRoot.height
                         implicitWidth: mediaPlayerRoot.width
                         spacing: 10
                         anchors.verticalCenter: mediaPlayerRoot.verticalCenter
+                        clip: true
                         ClippingRectangle {
-                            anchors.leftMargin: mediaPlayerRoot.pillInset
+                            anchors.leftMargin: mediaPlayerRoot.pillInset / 2
                             anchors.rightMargin: mediaPlayerRoot.leftMargin
                             implicitHeight: mediaPlayerRoot.implicitHeight - mediaPlayerRoot.pillInset
                             implicitWidth: implicitHeight
@@ -212,17 +244,38 @@ WrapperItem {
                             }
                         }
                         ColumnLayout {
+                            id: mediaColumn
                             Layout.fillWidth: true
                             Layout.rightMargin: mediaPlayerRoot.height / 2
                             spacing: 0
-                            Text {
+                            Rectangle {
+                                id: marqueeContainer
                                 Layout.fillWidth: true
-                                font.family: "JetBrainsMono Nerd Font"
-                                font.pixelSize: 10
-                                color: "black"
-                                text: `${Media.title} - ${Media.artist}`
+                                anchors.rightMargin: 20
+                                height: longText.height
+                                color: "transparent"
+                                clip: true
+                                Text {
+                                    id: longText
+                                    Layout.fillWidth: true
+                                    font.family: theme.defaultFont
+                                    font.pixelSize: 12
+                                    color: theme.fg
+                                    text: `${Media.title} - ${Media.artist}`
+                                    font.bold: true
+                                    onTextChanged: x = 0
+                                    NumberAnimation on x {
+                                        id: scrollAnim
+                                        from: longText.paintedWidth > marqueeContainer.width ? marqueeContainer.width : 0                      // Parte da fuori schermo a destra
+                                        to: -longText.paintedWidth                        // Finisce quando scompare a sinistra
+                                        duration: (marqueeContainer.width + longText.paintedWidth) * 30 // Velocità costante (8ms per pixel)
+                                        loops: Animation.Infinite                          // Ripete all'infinito
+                                        running: longText.paintedWidth > marqueeContainer.width // Attiva solo se il testo è più lungo dell'area
+                                    }
+                                }
                             }
                             Slider {
+                                id: mediaSlider
                                 Layout.fillWidth: true
                                 implicitWidth: parent.width
                                 visible: Media.timeBarFullSupport
@@ -233,7 +286,7 @@ WrapperItem {
                                 dotColor: "transparent"
                                 barThickness: 4
                                 cutBar: false
-                                accentColor: "black"
+                                accentColor: theme.fg
                                 changeValueAfterMoved: true
                                 handleSize: 4
                                 onMoved: newValue => {
@@ -245,11 +298,11 @@ WrapperItem {
                                 MediaControlIcon { // shuffle
                                     text: "󰒟"
                                     color: {
-                                        if (Media.shuffle == null)
-                                            return "red";
+                                        if (Media.shuffle == null || !Media.activePlayer?.shuffleSupported)
+                                            return theme.bg;
                                         if (Media.shuffle)
-                                            return "green";
-                                        return "blue";
+                                            return theme.fg;
+                                        return theme.fgOff;
                                     }
                                     MouseArea {
                                         anchors.fill: parent
@@ -259,7 +312,7 @@ WrapperItem {
                                 }
                                 MediaControlIcon { // back
                                     text: ""
-                                    color: Media.activePlayer?.canGoPrevious ? "black" : '#57000000'
+                                    color: Media.activePlayer?.canGoPrevious ? theme.fg : theme.fgOff
                                     MouseArea {
                                         anchors.fill: parent
                                         cursorShape: Qt.PointingHandCursor
@@ -268,7 +321,7 @@ WrapperItem {
                                 }
                                 MediaControlIcon { // play/pause
                                     text: Media.activePlayer?.isPlaying ? "" : ""
-                                    color: Media.activePlayer?.canTogglePlaying ? "black" : "#57000000"
+                                    color: Media.activePlayer?.canTogglePlaying ? theme.fg : theme.fgOff
                                     MouseArea {
                                         anchors.fill: parent
                                         cursorShape: Qt.PointingHandCursor
@@ -277,7 +330,7 @@ WrapperItem {
                                 }
                                 MediaControlIcon { // next
                                     text: ""
-                                    color: Media.activePlayer?.canGoNext ? "black" : '#57000000'
+                                    color: Media.activePlayer?.canGoNext ? theme.fg : theme.fgOff
                                     MouseArea {
                                         anchors.fill: parent
                                         cursorShape: Qt.PointingHandCursor
@@ -287,14 +340,14 @@ WrapperItem {
                                 MediaControlIcon { // loop
                                     text: ""
                                     color: {
-                                        if (Media.loop == null)
-                                            return "red";
+                                        if (Media.loop == null || !Media.activePlayer?.loopSupported)
+                                            return theme.bg;
                                         else if (Media.loop == MprisLoopState.Track)
-                                            return "green";
+                                            return theme.red2;
                                         else if (Media.loop == MprisLoopState.Playlist)
-                                            return '#ff6600';
+                                            return theme.blue1;
                                         else
-                                            return "blue";
+                                            return theme.fgOff;
                                     }
                                     MouseArea {
                                         anchors.fill: parent
@@ -309,8 +362,9 @@ WrapperItem {
 
                                 Text { // minutaggio
                                     Layout.alignment: Qt.AlignRight
-                                    color: "black"
-                                    font.family: "JetBrainsMono Nerd Font"
+                                    color: theme.fg
+                                    font.bold: true
+                                    font.family: theme.defaultFont
                                     font.pixelSize: 10
                                     text: `${Media.positionString}/${Media.lengthString}`
                                 }
@@ -327,69 +381,93 @@ WrapperItem {
                 Layout.fillHeight: true
                 anchors.centerIn: parent
                 Rectangle {
-                    // DA INSERIRE QUI
-                    implicitWidth: Screen.width / 4
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.top: parent.top
-                    implicitHeight: 3
-                    color: "#ff0000"
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        // Azione quando il mouse ENTRA
-                        onEntered: {
-                            Global.notificationPanelActive = true;
-                        }
-
-                        // Azione quando il mouse ESCE
-                        // onExited: {
-                        //     Global.notificationPanelActive = false;
-                        // }
-                    }
-                }
-                RowLayout {
-                    spacing: 12
+                    id: workspaceRoot
+                    property int pillInset: 4
+                    color: theme.bg
+                    implicitHeight: workspacesRow.implicitHeight + pillInset
+                    implicitWidth: workspacesRow.implicitWidth + pillInset
+                    radius: implicitHeight / 2
                     anchors.centerIn: parent
-                    Repeater {
-                        // Filtriamo la lista dei workspace di Hyprland
-                        model: {
-                            let ids = [1, 2, 3];
-                            for (let i = 0; i < Hyprland.workspaces.values.length; i++) {
-                                let ws = Hyprland.workspaces.values[i];
-                                if (ws.id > 3)
-                                    ids.push(ws.id);
-                            }
-                            return ids.sort((a, b) => a - b);
-                        }
-
-                        Text {
-                            text: modelData
-
-                            function getWorkspaceObject(id) {
+                    RowLayout {
+                        id: workspacesRow
+                        anchors.centerIn: parent
+                        spacing: 5
+                        Repeater {
+                            // Filtriamo la lista dei workspace di Hyprland
+                            model: {
+                                let alwaysShown = 5;
+                                let ids = [];
+                                for (let i = 1; i <= alwaysShown; i++) {
+                                    ids.push(i);
+                                }
+                                // let ids = [1, 2, 3, 4, 5];
                                 for (let i = 0; i < Hyprland.workspaces.values.length; i++) {
                                     let ws = Hyprland.workspaces.values[i];
-                                    if (ws.id === id)
-                                        return ws;
+                                    if (ws.id > alwaysShown)
+                                        ids.push(ws.id);
                                 }
-                                return null;
+                                return ids.sort((a, b) => a - b);
                             }
 
-                            readonly property var activeWs: getWorkspaceObject(modelData)
+                            delegate: Rectangle {
+                                function getWorkspaceObject(id) {
+                                    for (let i = 0; i < Hyprland.workspaces.values.length; i++) {
+                                        let ws = Hyprland.workspaces.values[i];
+                                        if (ws.id === id)
+                                            return ws;
+                                    }
+                                    return null;
+                                }
 
-                            color: {
-                                if (activeWs) {
-                                    if (activeWs.focused)
-                                        return "#ff0000";
-                                    else if (activeWs.toplevels.values.length > 0)
-                                        return "#00ff00";
-                                } else
-                                    return "#ffffff";
-                            }
-                            font.bold: true
-                            MouseArea {
-                                anchors.fill: parent
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: Hyprland.dispatch("workspace " + modelData)
+                                readonly property var activeWs: getWorkspaceObject(modelData)
+
+                                implicitHeight: theme.barHeigth / 2
+                                implicitWidth: activeWs?.focused ? implicitHeight * 2.5 : implicitHeight
+                                radius: implicitHeight / 2
+
+                                Behavior on implicitWidth {
+                                    NumberAnimation {
+                                        duration: 100
+                                        easing.type: Easing.OutCubic
+                                    }
+                                }
+
+                                color: {
+                                    if (activeWs) {
+                                        if (activeWs.focused)
+                                            return theme.red1;
+                                        else if (activeWs.urgent)
+                                            return theme.green2;
+                                        else if (activeWs.toplevels.values.length > 0)
+                                            return theme.magenta2;
+                                    } else
+                                        return theme.bg1;
+                                }
+
+                                Behavior on color {
+                                    ColorAnimation {
+                                        duration: 200
+                                        easing.type: Easing.OutCubic
+                                    }
+                                }
+
+                                Text {
+                                    text: modelData
+                                    anchors.centerIn: parent
+                                    color: activeWs?.urgent ? theme.fg4 : theme.fg
+                                    font.bold: true
+                                    Behavior on color {
+                                        ColorAnimation {
+                                            duration: 200
+                                            easing.type: Easing.OutCubic
+                                        }
+                                    }
+                                }
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: Hyprland.dispatch("workspace " + modelData)
+                                }
                             }
                         }
                     }
@@ -399,17 +477,18 @@ WrapperItem {
             RowLayout { //destra
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
-                spacing: 10
+                spacing: root.interModuleSpacing
 
                 Rectangle { // battery
                     visible: Battery.battery == null
-                    implicitWidth: 30
-                    implicitHeight: 30
+                    Layout.fillHeight: true
+                    implicitWidth: implicitHeight
                     radius: implicitHeight / 2
+                    color: theme.bg
                     Text {
                         anchors.centerIn: parent
                         text: Battery.battery?.percentage ? Battery.battery.percentage + "%" : "??"
-                        color: "#000000"
+                        color: theme.fg
                     }
                 }
 
@@ -424,7 +503,7 @@ WrapperItem {
                     // readonly property var activeSink: sinkTracker.objects.length > 0 ? sinkTracker.objects[0] : null
 
                     Text { //icon
-                        font.family: "JetBrainsMono Nerd Font"
+                        font.family: theme.defaultFont
                         // anchors.centerIn: parent
                         verticalAlignment: Text.AlignVCenter
                         lineHeight: 1.0
@@ -448,7 +527,7 @@ WrapperItem {
                     }
 
                     Text { // percentuale
-                        font.family: "JetBrainsMono Nerd Font"
+                        font.family: theme.defaultFont
                         // anchors.centerIn: parent
                         verticalAlignment: Text.AlignVCenter
                         // anchors.horizontalCenter: parent.horizontalCenter
@@ -468,11 +547,20 @@ WrapperItem {
 
                     Slider {
                         id: volumeSlider
+                        property int dotSize: 12
                         value: Audio.volume
                         width: 50
                         maximum: 1
-                        handleSize: 10
+                        handleSize: dotSize
                         step: 0.05
+                        handleDelegate: Rectangle {
+                            color: "transparent"
+                            implicitHeight: volumeSlider.dotSize
+                            implicitWidth: implicitHeight
+                            radius: implicitHeight / 2
+                            border.color: theme.fg
+                            border.width: 2
+                        }
                         onMoved: newValue => {
                             // value = newValue;
                             Audio.setVolume(newValue);
@@ -485,9 +573,10 @@ WrapperItem {
                 }
 
                 Rectangle { // bluetooth
-                    implicitHeight: 30
-                    implicitWidth: 30
-                    radius: 15
+                    implicitHeight: parent.implicitHeight
+                    implicitWidth: implicitHeight
+                    radius: implicitHeight / 2
+                    color: theme.bg
 
                     readonly property bool bluetoothState: {
                         let state = false;
@@ -511,7 +600,7 @@ WrapperItem {
                     }
 
                     Text {
-                        font.family: "JetBrainsMono Nerd Font"
+                        font.family: theme.defaultFont
                         anchors.centerIn: parent
                         verticalAlignment: Text.AlignVCenter
                         lineHeight: 1.0
@@ -520,10 +609,10 @@ WrapperItem {
                         text: "󰂯"
                         color: {
                             if (parent.bluetoothConnected)
-                                return "#00FF00"; // connected
+                                return theme.red2; // connected
                             if (parent.bluetoothState)
-                                return "#0000FF"; // bt on
-                            return "#FF0000"; // spento
+                                return theme.fg; // bt on
+                            return theme.fgOff; // spento
                         }
                     }
 
@@ -537,7 +626,7 @@ WrapperItem {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            var globalPos = parent.mapToGlobal(parent.width / 2, root.height);
+                            var globalPos = parent.mapToGlobal(parent.width / 2, parent.height);
                             Global.bluetoothPopupActive = !Global.bluetoothPopupActive;
                             Global.bluetoothButtonPosition = globalPos;
                         } //bluetoothMenu.running = true// TODO bt devices menu
@@ -545,9 +634,10 @@ WrapperItem {
                 }
 
                 Rectangle { // wifi
-                    implicitHeight: 30
-                    implicitWidth: 30
-                    radius: 15
+                    implicitHeight: parent.implicitHeight
+                    implicitWidth: implicitHeight
+                    radius: implicitHeight / 2
+                    color: theme.bg
 
                     readonly property var mainDevice: {
                         let devices = Networking.devices.values;
@@ -572,7 +662,7 @@ WrapperItem {
                     }
 
                     Text {
-                        font.family: "JetBrainsMono Nerd Font"
+                        font.family: theme.defaultFont
                         anchors.centerIn: parent
                         verticalAlignment: Text.AlignVCenter
                         lineHeight: 1.0
@@ -594,7 +684,7 @@ WrapperItem {
                             }
                             return "󱘖"; // disconnessa
                         }
-                        color: '#000000'
+                        color: theme.fg
                     }
 
                     Process {
@@ -607,7 +697,7 @@ WrapperItem {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            var globalPos = parent.mapToGlobal(parent.width / 2, root.height);
+                            var globalPos = parent.mapToGlobal(parent.width / 2, parent.height);
                             Global.networkPopupActive = !Global.networkPopupActive;
                             //connectionApp.running = true
                             Global.networkButtonPosition = globalPos;
@@ -624,24 +714,27 @@ WrapperItem {
                     }
 
                     Text { // orario
-                        color: "#ffffff"
+                        color: theme.fg
                         anchors.horizontalCenter: parent.horizontalCenter
                         horizontalAlignment: Text.AlignHCenter
                         text: (`${clock.hours.toString().padStart(2, "0")}:${clock.minutes.toString().padStart(2, "0")}:${clock.seconds.toString().padStart(2, "0")}`)
+                        font.family: theme.defaultFont
                     }
 
                     Text { //data
-                        color: "#ffffff"
+                        color: theme.fg
                         anchors.horizontalCenter: parent.horizontalCenter
                         horizontalAlignment: Text.AlignHCenter
                         text: Qt.formatDate(clock.date, "ddd d/M/yyyy")
+                        font.family: theme.defaultFont
                     }
                 }
 
                 Rectangle { //power button
-                    implicitWidth: 30
-                    implicitHeight: 30
+                    implicitHeight: parent.implicitHeight
+                    implicitWidth: implicitHeight
                     radius: implicitHeight / 2
+                    color: theme.magenta2
 
                     Process {
                         id: powerOptions
@@ -652,7 +745,9 @@ WrapperItem {
                     Text {
                         anchors.centerIn: parent
                         text: "⏻"
-                        color: "#000000"
+                        color: theme.fg4
+                        font.pixelSize: parent.implicitHeight * 0.5
+                        font.family: theme.defaultFont
                     }
 
                     MouseArea {

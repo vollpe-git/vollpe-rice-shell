@@ -1,5 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export EDITOR:fresh
+SETUVAR --export VISUAL:fresh
 SETUVAR __fish_initialized:4300
 SETUVAR fish_color_autosuggestion:white
 SETUVAR fish_greeting:\x1d

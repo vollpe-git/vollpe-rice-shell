@@ -1,0 +1,14 @@
+[StreamInputs]
+blocklist=OBS
+inputDevice=bluez_input.3C:B0:ED:34:E0:0C
+
+[StreamOutputs]
+outputDevice=bluez_output.3C_B0_ED_34_E0_0C.1
+plugins=equalizer#0
+visiblePage=pluginsPage
+visiblePlugin=equalizer#0
+
+[Window]
+height=1014
+visiblePage=inputPage
+width=931

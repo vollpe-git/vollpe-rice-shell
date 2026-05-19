@@ -1,0 +1,16 @@
+# yazi.toml
+[mgr]
+show_hidden = true
+sort_by = "mtime"
+sort_reverse = true
+linemode = "size_and_mtime"
+show_symlink = true
+
+[opener]
+fresh_editor = [
+    { run = 'fresh "$@"', block = true, desc = "Fresh Editor", for = "unix" }
+]
+
+edit = [
+    { run = 'fresh "$@"', block = true, desc = "Fresh Editor", for = "unix" }
+]

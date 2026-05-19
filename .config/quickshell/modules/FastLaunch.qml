@@ -14,19 +14,27 @@ PopupPanel {
     // height: mainLayout.implicitHeight + 20
 
     id: flRoot
-    exclusionMode: ExclusionMode.Ignore
+    // exclusionMode: ExclusionMode.Ignore
     property int buttonDimension: 40
     property int buttonSpacing: 10
     property int buttonColumns: 3
     property int buttonRows: 2
-    property int topDistance: 30
+    property int topDistance: 0
     property point buttonPosition: Global.fastLauncherButtonPosition
     // x: buttonPosition.x
     // anchors.top: true
     // anchors.left: true
-    x: Global.fastLauncherButtonPosition.x - (implicitWidth / 2)
-    y: Global.fastLauncherButtonPosition.y + topDistance
-    visible: Global.fastLauncherActive
+    x: Global.fastLauncherButtonPosition.x - (implicitWidth / 2)// + theme.leftBarWidth
+    y: Global.fastLauncherButtonPosition.y + topDistance + theme.barPadding / 2
+    // visible: Global.fastLauncherActive
+    // onVisibleChanged: {
+    //     if (visible)
+    //         active = visible;
+    // }
+    // onActiveChanged: {
+    //     Global.fastLauncherActive = active;
+    // }
+    bindProperty: "fastLauncherActive"
     implicitWidth: (buttonDimension * buttonColumns) + (buttonSpacing * (buttonColumns + 2))
     implicitHeight: buttonDimension * buttonRows + buttonSpacing * (buttonRows + 2)
     color: "transparent"
@@ -43,8 +51,10 @@ PopupPanel {
     Rectangle {
         id: background
         anchors.fill: parent
-        radius: height / 4
-        color: '#30ffffff'
+        // radius: height / 4
+        bottomLeftRadius: height / 4
+        bottomRightRadius: bottomLeftRadius
+        color: theme.bg2
         GridLayout {
             id: mainLayout
             // Layout.fillWidth: true
@@ -67,7 +77,8 @@ PopupPanel {
             }
             AppButton {
                 icon: "󰏪"
-                appName: "gedit"
+                appName: "fresh"
+                command: ["kitty", "-e", "fresh"]
             }
             // ---second line---
             AppButton {
@@ -76,11 +87,12 @@ PopupPanel {
             }
             AppButton {
                 icon: ""
-                appName: "dolphin"
+                appName: "yazi"
+                command: ["kitty", "-e", "yazi"]
             }
             AppButton {
                 icon: ""
-                appName: "code"
+                appName: "zeditor"
             }
         }
     }
@@ -88,17 +100,20 @@ PopupPanel {
         property var icon: ""
         property var appName: ""
         Layout.alignment: Qt.AlignCenter
+        property alias command: appCommand.command
         // Layout.fillWidth: true
         // Layout.fillHeight: true
         height: 40
         width: height
         radius: height / 2
+        color: theme.bg
         Text {
             anchors.centerIn: parent
-            verticalAlignment: Text.AlignVCenter
-            color: "#000000"
-            font.pixelSize: 30
+            // verticalAlignment: Text.AlignVCenter
+            // horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 24
             text: parent.icon
+            color: theme.fg
         }
         Process {
             id: appCommand

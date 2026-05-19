@@ -8,7 +8,7 @@ import "../widgets"
 StackLayout {
     NotesManager {
         id: noteManager
-        distance: tab.thickness
+        // distance: tab.thickness
         HyprlandFocusGrab {
             // active: root.margins.left == root.distance // Si attiva solo quando la finestra è visibile
             active: Global.notesActive
@@ -21,7 +21,6 @@ StackLayout {
     }
     NotesTab {
         id: tab
-        thickness: 20
         Component.onCompleted: {
             console.log("Posizione Y globale del top: " + tab.y);
         }

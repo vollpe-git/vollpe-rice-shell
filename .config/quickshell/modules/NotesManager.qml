@@ -8,11 +8,11 @@ import "../widgets"
 PanelWindow {
     id: root
     // visible: Global.notesActive
-    property int distance: 0
+    // property int distance: 0
     // margins.left: distance
     // focusable: Global.notesTab == 1 && Global.notesActive
     focusable: Global.notesActive
-    margins.left: Global.notesActive ? distance : -implicitWidth
+    margins.left: Global.notesActive ? theme.leftBarWidth : -implicitWidth
     color: "transparent"
 
     Behavior on margins.left {
@@ -42,8 +42,9 @@ PanelWindow {
 
     Rectangle {
         anchors.fill: parent
-        topRightRadius: root.distance / 2
+        topRightRadius: theme.leftBarWidth / 2
         bottomRightRadius: topRightRadius
+        color: theme.bg
         // tab 1: text
         NotesText {
             anchors.fill: parent
