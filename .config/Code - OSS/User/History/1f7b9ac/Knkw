@@ -1,5 +1,0 @@
-singleton Audio 1.0 Audio.qml
-singleton SysInfo 1.0 SysInfo.qml
-singleton Media 1.0 Media.qml
-singleton Global 1.0 Global.qml
-singleton Bluetooth 1.0 Bluetooth.qml

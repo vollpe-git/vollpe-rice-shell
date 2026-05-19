@@ -1,7 +1,0 @@
-2026-05-07 17:52:43.717 [info] Getting Manifest... ms-python.vscode-python-envs
-2026-05-07 17:52:43.942 [info] Installing extension: ms-python.vscode-python-envs {"productVersion":{"version":"1.117.0","date":"2026-04-21T16:12:14-07:00"},"pinned":false,"operation":3,"isApplicationScoped":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/vollpe/.vscode-oss/extensions/extensions.json","path":"/home/vollpe/.vscode-oss/extensions/extensions.json","scheme":"vscode-userdata"},"isBuiltin":false}
-2026-05-07 17:52:45.624 [info] Extension signature verification result for ms-python.vscode-python-envs: Success. Executed: true. Duration: 599ms.
-2026-05-07 17:52:45.761 [info] Extracted extension to file:///home/vollpe/.vscode-oss/extensions/ms-python.vscode-python-envs-1.30.0-universal: ms-python.vscode-python-envs
-2026-05-07 17:52:45.775 [info] Renamed to /home/vollpe/.vscode-oss/extensions/ms-python.vscode-python-envs-1.30.0-universal
-2026-05-07 17:52:45.795 [info] Marked extension as removed ms-python.vscode-python-envs-1.28.0-universal
-2026-05-07 17:52:45.796 [info] Extension installed successfully: ms-python.vscode-python-envs vscode-userdata:/home/vollpe/.vscode-oss/extensions/extensions.json

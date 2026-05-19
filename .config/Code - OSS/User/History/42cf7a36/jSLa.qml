@@ -1,3 +1,0 @@
-import qs.widgets
-
-PopupPanel{}

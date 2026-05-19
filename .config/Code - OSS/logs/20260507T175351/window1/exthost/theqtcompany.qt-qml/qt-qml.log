@@ -1,8 +1,0 @@
-2026-05-07 17:53:53.255 [info] [project] Creating project:/home/vollpe/.config/quickshell
-2026-05-07 17:53:53.255 [info] [qmlls] Fetching release information
-2026-05-07 17:53:53.550 [info] [qmlls] Status Check: Found, but not executable
-2026-05-07 17:57:13.726 [info] [qmlls] Starting QML Language Server with:
-2026-05-07 17:57:13.758 [info] [qmlls] QML Language Server started for quickshell /usr/bin/qmlls6
-2026-05-07 18:10:25.845 [info] [extension] Deactivating qt-qml
-2026-05-07 18:10:25.845 [info] [project] Disposing project:/home/vollpe/.config/quickshell
-2026-05-07 18:10:25.845 [warning] [qmlls] Canceled

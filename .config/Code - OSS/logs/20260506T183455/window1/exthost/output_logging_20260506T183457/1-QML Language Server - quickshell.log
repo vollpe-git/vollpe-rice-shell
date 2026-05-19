@@ -1,7 +1,0 @@
-[Warn  - 6:38:33 PM] Registration of file updates failed, will miss file changes from outside the editor.-32603 Request client/registerCapability failed with message: No feature implementation for workspace.didChangeWatchedFiles found. Registration failed.
-[Error - 6:43:19 PM] Request textDocument/definition failed.
-  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
-  Code: 0 
-[Error - 6:43:51 PM] Request textDocument/definition failed.
-  Message: Cannot proceed: current QML document is invalid! Fix all the errors in your QML code and try again.
-  Code: 0 

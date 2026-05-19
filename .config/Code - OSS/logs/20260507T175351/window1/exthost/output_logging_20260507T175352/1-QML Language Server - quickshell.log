@@ -1,4 +1,0 @@
-[Warn  - 5:57:13 PM] Registration of file updates failed, will miss file changes from outside the editor.-32603 Request client/registerCapability failed with message: No feature implementation for workspace.didChangeWatchedFiles found. Registration failed.
-[Error - 5:59:29 PM] Request textDocument/formatting failed.
-  Message: Cannot format invalid documents!
-  Code: 0 

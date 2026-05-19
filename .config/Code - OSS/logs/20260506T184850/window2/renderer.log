@@ -1,5 +1,0 @@
-2026-05-06 21:19:06.025 [info] Started local extension host with pid 62689.
-2026-05-06 21:19:06.305 [error] Extension 'ms-python.debugpy CANNOT USE these API proposals 'portsAttributes, debugVisualization, contribViewsWelcome'. You MUST start in extension development mode or use the --enable-proposed-api command line flag
-2026-05-06 21:19:06.305 [error] Extension 'ms-python.python CANNOT USE these API proposals 'contribEditorContentMenu, quickPickSortByLabel, testObserver, quickPickItemTooltip, terminalDataWriteEvent, terminalExecuteCommandEvent, codeActionAI, notebookReplDocument, notebookVariableProvider'. You MUST start in extension development mode or use the --enable-proposed-api command line flag
-2026-05-06 21:19:06.305 [error] Extension 'ms-python.vscode-python-envs CANNOT USE these API proposals 'terminalShellEnv, terminalDataWriteEvent, taskExecutionTerminal'. You MUST start in extension development mode or use the --enable-proposed-api command line flag
-2026-05-06 21:19:06.590 [warning] [DefaultAccount] Attempt 1 to get sessions failed: Canceled
