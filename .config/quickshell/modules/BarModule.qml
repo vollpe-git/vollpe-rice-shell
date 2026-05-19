@@ -222,25 +222,83 @@ WrapperItem {
                         anchors.verticalCenter: mediaPlayerRoot.verticalCenter
                         clip: true
                         ClippingRectangle {
+                            id: albumArtContainer
+                            height: mediaPlayerRoot.implicitHeight - mediaPlayerRoot.pillInset
+                            width: height
+
                             anchors.leftMargin: mediaPlayerRoot.pillInset / 2
                             anchors.rightMargin: mediaPlayerRoot.leftMargin
-                            implicitHeight: mediaPlayerRoot.implicitHeight - mediaPlayerRoot.pillInset
-                            implicitWidth: implicitHeight
-                            color: "black"
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
                             radius: height / 2
+                            color: "black"
+
                             Image {
+                                id: coverImage
                                 source: Media.cover || ""
                                 anchors.fill: parent
-
-                                // --- LE PROPRIETÀ PER IL RIDIMENSIONAMENTO ---
                                 fillMode: Image.PreserveAspectCrop
                                 antialiasing: true
-
-                                // Centra l'immagine nel caso venga ritagliata
                                 horizontalAlignment: Image.AlignHCenter
                                 verticalAlignment: Image.AlignVCenter
+
+                                // Sostituiamo NumberAnimation con RotationAnimation
+                                RotationAnimation {
+                                    id: vinylAnimation
+                                    target: coverImage
+                                    property: "rotation"
+
+                                    // Definiamo un ciclo continuo completo da 0 a 360
+                                    from: 0
+                                    to: 360
+                                    duration: 7500
+                                    direction: RotationAnimation.Clockwise
+                                    loops: Animation.Infinite
+
+                                    // Non usiamo più la proprietà "running" specchiata direttamente,
+                                    // ma usiamo un intercettore sui cambiamenti di stato del player
+                                }
+
+                                // Questo blocco monitora lo stato del player in tempo reale
+                                // e mette in pausa/riprende l'animazione ESATTAMENTE dallo stesso grado
+                                Connections {
+                                    target: Media.activePlayer
+
+                                    // Quando cambia lo stato di riproduzione
+                                    function onIsPlayingChanged() {
+                                        if (Media.activePlayer && Media.activePlayer.isPlaying) {
+                                            // Se l'animazione era totalmente ferma, la startiamo, altrimenti riprende dal millisecondo esatto
+                                            if (!vinylAnimation.running) {
+                                                vinylAnimation.start();
+                                            } else {
+                                                vinylAnimation.resume();
+                                            }
+                                        } else {
+                                            // Mette in pausa congelando la rotazione corrente senza resettarla
+                                            vinylAnimation.pause();
+                                        }
+                                    }
+                                }
+
+                                // Sicurezza: se cambia traccia o il player si distrugge, resettiamo a 0
+                                onSourceChanged: {
+                                    vinylAnimation.stop();
+                                    coverImage.rotation = 0;
+                                    if (Media.activePlayer && Media.activePlayer.isPlaying) {
+                                        vinylAnimation.start();
+                                    }
+                                }
+
+                                // Il tuo pallino centrale (invariato)
+                                Rectangle {
+                                    id: centerDot
+                                    height: parent.height / 4
+                                    width: height
+                                    radius: height / 2
+                                    color: "#000000" // Ora puoi rimetterlo nero
+                                    anchors.centerIn: parent
+                                    z: 99
+                                }
                             }
                         }
                         ColumnLayout {

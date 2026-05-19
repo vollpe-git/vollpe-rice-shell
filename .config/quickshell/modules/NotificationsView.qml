@@ -15,6 +15,39 @@ Item {
     anchors.leftMargin: 10
     anchors.rightMargin: anchors.leftMargin
 
+    // Array dove salviamo i modelli delle notifiche da eliminare al restore del pannello
+    property var notificationsToEliminate: []
+    Connections {
+        target: Global
+
+        function onNotificationPanelActiveChanged() {
+            if (!Global.notificationPanelActive) {
+                // Il tuo ciclo di pulizia
+                for (let i = 0; i < root.notificationsToEliminate.length; i++) {
+                    if (root.notificationsToEliminate[i]) {
+                        root.notificationsToEliminate[i].dismiss();
+                    }
+                }
+                root.notificationsToEliminate = []; // Svuota l'array
+            }
+        }
+    }
+
+    // Ascolto la chiusura del pannello per purgare il backend
+    Connections {
+        target: Global
+        function onNotificationPanelActiveChanged() {
+            if (!Global.notificationPanelActive) {
+                for (let i = 0; i < root.notificationsToEliminate.length; i++) {
+                    if (root.notificationsToEliminate[i]) {
+                        root.notificationsToEliminate[i].dismiss();
+                    }
+                }
+                root.notificationsToEliminate = []; // Svuota l'array
+            }
+        }
+    }
+
     Text {
         visible: Notifications.numberOfNotifications == 0
         text: "No Notifications To View"
@@ -25,21 +58,20 @@ Item {
     }
 
     ListView {
+        id: notificationsListView
         anchors.fill: parent
         model: Notifications.notifications.values
-        spacing: 30
+        spacing: 0
+        cacheBuffer: 0
 
-        delegate: Rectangle {
-            id: delegateRoot
-            color: theme.bg
-            radius: implicitHeight / 2 // Pillola geometricamente perfetta sempre
+        delegate: Item {
+            id: delegateContainer
             implicitWidth: parent.width
 
-            // L'altezza totale segue il layout principale, così la pillola cresce/si stringe
-            implicitHeight: mainLayout.implicitHeight + 30
+            // Se dismessa, l'altezza collassa a 0 portandosi dietro lo spazio fantasma sotto
+            implicitHeight: isDismissed ? 0 : (delegateRoot.implicitHeight + 30)
 
-            property bool inlineResponseActive: false
-            clip: true
+            property bool isDismissed: false
 
             Behavior on implicitHeight {
                 NumberAnimation {
@@ -48,234 +80,259 @@ Item {
                 }
             }
 
-            SequentialAnimation {
-                id: eliminateNotification
+            Rectangle {
+                id: delegateRoot
+                color: theme.bg
+                radius: implicitHeight / 2
 
-                NumberAnimation {
-                    id: slideOutAnimation
-                    target: delegateRoot
-                    property: "x"
-                    from: 0
-                    to: delegateRoot.width + 100 // Sposta tutto il contenuto oltre il bordo destro della notifica
-                    duration: 300
-                    easing.type: Easing.InQuad
-                    // TRIGGER FONDAMENTALE: Cancella la notifica dal backend solo quando lo slide è finito!
-                    // onStopped: slideUpAnimation.start()
-                }
-                NumberAnimation {
-                    id: slideUpAnimation
-                    target: delegateRoot
-                    property: "height"
-                    // from: parent.height
-                    to: 0
-                    duration: 100
-                    easing.type: Easing.Linear
-                    // TRIGGER FONDAMENTALE: Cancella la notifica dal backend solo quando lo slide è finito!
-                    // onStopped: modelData.dismiss()
-                }
-                onStopped: modelData.dismiss()
-            }
+                // FIX FONDAMENTALE: Via le ancore combinate che bloccavano lo slide!
+                anchors.top: parent.top
+                width: parent.width // Mantiene la pillola responsive senza usare anchors.right
 
-            MouseArea {
-                anchors.fill: parent
-                // Invece di killare subito la notifica, avviamo l'animazione
-                onClicked: eliminateNotification.start()
-            }
+                implicitHeight: mainLayout.implicitHeight + 30
 
-            // MouseArea {
-            //     anchors.fill: parent
-            //     onClicked: modelData.dismiss()
-            // }
+                property bool inlineResponseActive: false
+                clip: true
 
-            // LA TUA STRUTTURA: Icona a sinistra, colonna di contenuti a destra
-            RowLayout {
-                id: mainLayout
-                anchors.fill: parent
-                // anchors.margins: 15
-                // anchors.leftMargin: 25
-                // anchors.rightMargin: anchors.leftMargin
-                // spacing: 15
+                // Opacità legata al container per svanire durante il collasso
+                opacity: delegateContainer.isDismissed ? 0 : 1
 
-                Text {
-                    id: appIcon
-                    text: IconMapper.getIcon(modelData.appName, "")
-                    Layout.alignment: Qt.AlignVCenter // CENTRATA RISPETTO A TUTTA LA NOTIFICA
-                    font.family: theme.defaultFont
-                    font.pixelSize: 20
-                    leftPadding: 25
-                    rightPadding: leftPadding
-                    // Layout.rightMargin: 25
-                    // Layout.leftMargin: Layout.rightMargin
-                    color: theme.fg
-                }
-
-                // Questa colonna contiene il blocco di testo E la riga dei bottoni sotto
-                ColumnLayout {
-                    id: textAndButtonsColumn
-                    Layout.fillWidth: true
-                    spacing: 4
-                    Layout.rightMargin: appIcon.width// + appIcon.left
-
-                    Text {
-                        text: modelData.appName
-                        font.bold: true
-                        Layout.fillWidth: true
-                        horizontalAlignment: Text.AlignLeft
-                        font.family: theme.defaultFont
-                        color: theme.fg
-                        font.pixelSize: 14
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 150
                     }
+                }
+
+                SequentialAnimation {
+                    id: eliminateNotification
+
+                    NumberAnimation {
+                        target: delegateRoot
+                        property: "x"
+                        from: 0
+                        to: delegateRoot.width + 100
+                        duration: 200
+                        easing.type: Easing.InQuad
+                    }
+                    onStopped: {
+                        // Pushiamo il modello corrente nell'array globale di eliminazione
+                        let tempArray = root.notificationsToEliminate;
+                        tempArray.push(modelData);
+                        root.notificationsToEliminate = tempArray;
+
+                        // Avviamo il collasso dell'altezza dello slot
+                        delegateContainer.isDismissed = true;
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    enabled: !delegateContainer.isDismissed
+                    onClicked: eliminateNotification.start()
+                }
+
+                // Struttura interna invariata
+                RowLayout {
+                    id: mainLayout
+                    anchors.fill: parent
 
                     Text {
-                        text: modelData.body.replace(/<\/?[^>]+(>|$)/g, "")
-                        elide: Text.ElideRight
-                        textFormat: Text.PlainText
-                        wrapMode: Text.WrapAnywhere
-                        Layout.fillWidth: true
-                        horizontalAlignment: Text.AlignLeft
+                        id: appIcon
+                        text: IconMapper.getIcon(modelData.appName, "")
+                        Layout.alignment: Qt.AlignVCenter
                         font.family: theme.defaultFont
+                        font.pixelSize: 20
+                        leftPadding: 25
+                        rightPadding: leftPadding
                         color: theme.fg
                     }
 
-                    // La riga dei pulsanti vive dentro la colonna di destra
-                    RowLayout {
-                        id: buttonRow
+                    ColumnLayout {
+                        id: textAndButtonsColumn
                         Layout.fillWidth: true
-                        Layout.topMargin: 4
+                        spacing: 4
+                        Layout.rightMargin: appIcon.width
 
-                        // NUOVO: Aggiungiamo il margine a destra speculare a quello che c'è a sinistra prima del testo
-                        // Layout.rightMargin: appIcon.width + mainLayout.spacing
-
-                        Layout.preferredHeight: (delegateRoot.inlineResponseActive || (modelData.hasInlineReply && !delegateRoot.inlineResponseActive)) ? 25 : 0
-                        spacing: delegateRoot.inlineResponseActive ? 10 : 0
-                        clip: true
-
-                        visible: modelData.hasInlineReply && Layout.preferredHeight > 0
-
-                        Behavior on Layout.preferredHeight {
-                            NumberAnimation {
-                                duration: 100
-                                easing.type: Easing.InOutQuad
-                            }
-                        }
-
-                        TextArea {
-                            id: responseInput
-
-                            // AGGIORNATO: Sottraiamo anche il nuovo rightMargin dal calcolo per non far sforare la TextArea
-                            Layout.preferredWidth: delegateRoot.inlineResponseActive ? (textAndButtonsColumn.width - 100 - buttonRow.Layout.rightMargin - (buttonRow.spacing * 2)) : 0
-                            implicitHeight: parent.height
-                            padding: 3
-                            leftPadding: 10
-                            rightPadding: 10
+                        Text {
+                            text: modelData.appName
+                            font.bold: true
+                            Layout.fillWidth: true
+                            horizontalAlignment: Text.AlignLeft
                             font.family: theme.defaultFont
                             color: theme.fg
-
-                            background: Rectangle {
-                                color: theme.bg1
-                                radius: height / 2
-                            }
-
-                            hoverEnabled: true
-                            onHoveredChanged: root.focusedTextArea = hovered
-
-                            Behavior on Layout.preferredWidth {
-                                NumberAnimation {
-                                    duration: 100
-                                    easing.type: Easing.Linear
-                                }
-                            }
+                            font.pixelSize: 14
                         }
 
-                        Rectangle { // Tasto Nero (Invia)
-                            id: sendResponse
-                            color: theme.blue1
-                            implicitHeight: parent.height
-                            radius: implicitHeight / 2
-                            Layout.preferredWidth: delegateRoot.inlineResponseActive ? 50 : 0
+                        Text {
+                            text: modelData.body.replace(/<\/?[^>]+(>|$)/g, "")
+                            elide: Text.ElideRight
+                            textFormat: Text.PlainText
+                            wrapMode: Text.WrapAnywhere
+                            Layout.fillWidth: true
+                            horizontalAlignment: Text.AlignLeft
+                            font.family: theme.defaultFont
+                            color: theme.fg
+                        }
+
+                        RowLayout {
+                            id: buttonRow
+                            Layout.fillWidth: true
+                            Layout.topMargin: 4
+                            Layout.preferredHeight: (delegateRoot.inlineResponseActive || (modelData.hasInlineReply && !delegateRoot.inlineResponseActive)) ? 25 : 0
+                            spacing: delegateRoot.inlineResponseActive ? 10 : 0
                             clip: true
+                            visible: modelData.hasInlineReply && Layout.preferredHeight > 0
 
-                            Behavior on Layout.preferredWidth {
+                            Behavior on Layout.preferredHeight {
                                 NumberAnimation {
                                     duration: 100
-                                    easing.type: Easing.Linear
+                                    easing.type: Easing.InOutQuad
                                 }
                             }
 
-                            Text {
-                                text: "➔"
-                                color: theme.fg4
-                                anchors.centerIn: parent
+                            TextArea {
+                                id: responseInput
+                                Layout.preferredWidth: delegateRoot.inlineResponseActive ? (textAndButtonsColumn.width - 100 - buttonRow.Layout.rightMargin - (buttonRow.spacing * 2)) : 0
+                                implicitHeight: parent.height
+                                padding: 3
+                                leftPadding: 10
+                                rightPadding: 10
                                 font.family: theme.defaultFont
-                                font.pixelSize: 25
+                                color: theme.fg
+
+                                background: Rectangle {
+                                    color: theme.bg1
+                                    radius: height / 2
+                                }
+
+                                hoverEnabled: true
+                                onHoveredChanged: root.focusedTextArea = hovered
+
+                                Behavior on Layout.preferredWidth {
+                                    NumberAnimation {
+                                        duration: 100
+                                        easing.type: Easing.Linear
+                                    }
+                                }
                             }
 
-                            MouseArea {
-                                anchors.fill: parent
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: eliminateNotificationReply.start() //modelData.sendInlineReply(responseInput.text)
+                            Rectangle { // Tasto Nero (Invia)
+                                id: sendResponse
+                                color: theme.blue1
+                                implicitHeight: parent.height
+                                radius: implicitHeight / 2
+                                Layout.preferredWidth: delegateRoot.inlineResponseActive ? 50 : 0
+                                clip: true
+
+                                Behavior on Layout.preferredWidth {
+                                    NumberAnimation {
+                                        duration: 100
+                                        easing.type: Easing.Linear
+                                    }
+                                }
+
+                                Text {
+                                    text: "➔"
+                                    color: theme.fg4
+                                    anchors.centerIn: parent
+                                    font.family: theme.defaultFont
+                                    font.pixelSize: 25
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: eliminateNotificationReply.start()
+                                }
+
+                                SequentialAnimation {
+                                    id: eliminateNotificationReply
+
+                                    NumberAnimation {
+                                        target: delegateRoot
+                                        property: "x"
+                                        from: 0
+                                        to: delegateRoot.width + 100
+                                        duration: 300
+                                        easing.type: Easing.InQuad
+                                    }
+                                    NumberAnimation {
+                                        target: delegateRoot
+                                        property: "height"
+                                        to: 0
+                                        duration: 100
+                                        easing.type: Easing.Linear
+                                    }
+                                    onStopped: {
+                                        modelData.sendInlineReply(responseInput.text);
+                                        delegateContainer.isDismissed = true;
+                                    }
+                                }
                             }
 
-                            SequentialAnimation {
-                                id: eliminateNotificationReply
+                            Rectangle { // Tasto Rosso (Reply / Chiudi)
+                                id: openCloseResponse
+                                color: theme.red1
+                                implicitHeight: parent.height
+                                radius: implicitHeight / 2
+                                Layout.preferredWidth: delegateRoot.inlineResponseActive ? 50 : (textAndButtonsColumn.width - buttonRow.Layout.rightMargin)
+                                clip: true
 
-                                NumberAnimation {
-                                    target: delegateRoot
-                                    property: "x"
-                                    from: 0
-                                    to: delegateRoot.width + 100 // Sposta tutto il contenuto oltre il bordo destro della notifica
-                                    duration: 300
-                                    easing.type: Easing.InQuad
-                                    // TRIGGER FONDAMENTALE: Cancella la notifica dal backend solo quando lo slide è finito!
-                                    // onStopped: slideUpAnimation.start()
+                                Behavior on Layout.preferredWidth {
+                                    NumberAnimation {
+                                        duration: 100
+                                        easing.type: Easing.Linear
+                                    }
                                 }
-                                NumberAnimation {
-                                    target: delegateRoot
-                                    property: "height"
-                                    // from: parent.height
-                                    to: 0
-                                    duration: 100
-                                    easing.type: Easing.Linear
-                                    // TRIGGER FONDAMENTALE: Cancella la notifica dal backend solo quando lo slide è finito!
-                                    // onStopped: modelData.dismiss()
+
+                                Text {
+                                    text: delegateRoot.inlineResponseActive ? "" : "Reply"
+                                    color: theme.fg4
+                                    font.family: theme.defaultFont
+                                    font.pixelSize: delegateRoot.inlineResponseActive ? 20 : 15
+                                    anchors.centerIn: parent
+                                    font.bold: true
                                 }
-                                onStopped: modelData.sendInlineReply(responseInput.text)
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: delegateRoot.inlineResponseActive = !delegateRoot.inlineResponseActive
+                                }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
 
-                        Rectangle { // Tasto Rosso (Reply / Chiudi)
-                            id: openCloseResponse
-                            color: theme.red1
-                            implicitHeight: parent.height
-                            radius: implicitHeight / 2
-                            // Layout.alignment: Qt.AlignRight
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: 30
+        anchors.rightMargin: anchors.leftMargin
+        anchors.bottomMargin: 10
 
-                            // AGGIORNATO: Ora quando è chiuso si allarga prendendo la larghezza della colonna meno il margine destro impostato
-                            Layout.preferredWidth: delegateRoot.inlineResponseActive ? 50 : (textAndButtonsColumn.width - buttonRow.Layout.rightMargin)
-                            clip: true
-
-                            Behavior on Layout.preferredWidth {
-                                NumberAnimation {
-                                    duration: 100
-                                    easing.type: Easing.Linear
-                                }
-                            }
-
-                            Text {
-                                text: delegateRoot.inlineResponseActive ? "" : "Reply"
-                                color: theme.fg4
-                                font.family: theme.defaultFont
-                                font.pixelSize: delegateRoot.inlineResponseActive ? 20 : 15
-                                anchors.centerIn: parent
-                                font.bold: true
-                            }
-
-                            MouseArea {
-                                anchors.fill: parent
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: delegateRoot.inlineResponseActive = !delegateRoot.inlineResponseActive
-                            }
-                        }
+        height: 30
+        radius: height / 2
+        color: theme.red1
+        Text {
+            text: " CLEAR ALL "
+            font.family: theme.defaultFont
+            font.pixelSize: 20
+            color: theme.fg4
+            anchors.centerIn: parent
+        }
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+                let activeNotifications = Notifications.notifications.values;
+                for (let i = activeNotifications.length - 1; i >= 0; i--) {
+                    if (activeNotifications[i]) {
+                        activeNotifications[i].dismiss();
                     }
                 }
             }
