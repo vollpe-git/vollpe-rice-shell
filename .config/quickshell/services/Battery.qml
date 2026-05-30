@@ -5,8 +5,12 @@ import Quickshell.Services.UPower
 
 Singleton {
     property var battery: UPower.displayDevice?.ready ? UPower.displayDevice : null
-    property int percentage: battery?.percentage ?? -1
+    property int percentage: -1//battery ? Math.floor(battery.percentage * 100) : -1
     property int health: battery?.healthSupported ? battery.healthPercentage : -1
+    property bool present: battery ? true : false
+    onBatteryChanged: {
+        percentage = battery ? Math.floor(battery.percentage * 100) : -1
+    }
     function timeToEmptyString() {
         if (battery?.timeToEmpty) {
             let min = Math.floor(battery.timeToEmpty / 60);

@@ -52,7 +52,7 @@ PopupPanel {
         id: background
         anchors.fill: parent
         // radius: height / 4
-        bottomLeftRadius: height / 4
+        bottomLeftRadius: 25
         bottomRightRadius: bottomLeftRadius
         color: theme.bg2
         GridLayout {

@@ -43,8 +43,7 @@ Item {
         if (manualPlayer === player) {
             manualPlayer = null;
         } else {
-            if (root.activePlayer.isPlaying)
-                togglePlay();
+            togglePlay();
             manualPlayer = player;
         }
     }
@@ -153,8 +152,6 @@ Item {
             root.position = 0;
             timeTimer.stop();
         }
-        if (!activePlayer.isPlaying)
-            togglePlay();
     }
 
     // onPlayersChanged: {

@@ -524,7 +524,7 @@ WrapperItem {
                                 MouseArea {
                                     anchors.fill: parent
                                     cursorShape: Qt.PointingHandCursor
-                                    onClicked: Hyprland.dispatch("workspace " + modelData)
+                                    onClicked: Hyprland.usingLua ? Hyprland.dispatch(`hl.dsp.focus({ workspace = ${modelData} })`) : Hyprland.dispatch("workspace " + modelData)
                                 }
                             }
                         }
@@ -538,15 +538,38 @@ WrapperItem {
                 spacing: root.interModuleSpacing
 
                 Rectangle { // battery
-                    visible: Battery.battery == null
-                    Layout.fillHeight: true
-                    implicitWidth: implicitHeight
+                    visible: Battery.present
+                    implicitHeight: parent.implicitHeight
+                    implicitWidth: implicitHeight * 2
                     radius: implicitHeight / 2
                     color: theme.bg
-                    Text {
-                        anchors.centerIn: parent
-                        text: Battery.battery?.percentage ? Battery.battery.percentage + "%" : "??"
+                    Text{
+                        text: {
+                            if(Battery.percentage > 80)
+                                return ""
+                            else if(Battery.percentage > 60)
+                                return ""
+                            else if(Battery.percentage > 40)
+                                return ""
+                            else if(Battery.percentage > 20)
+                                return ""
+                            else if(Battery.percentage > 0)
+                                return ""
+                        }
                         color: theme.fg
+                        font.family: theme.defaultFont
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        leftPadding: parent.radius / 2
+                    }
+                    Text {
+                        //anchors.centerIn: parent
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: Battery.percentage + "%"
+                        color: theme.fg
+                        font.family: theme.defaultFont
+                        rightPadding: parent.radius / 2
                     }
                 }
 

@@ -13,3 +13,4 @@ image/png=gwenview-7.desktop;
 text/plain=fresh.desktop
 x-scheme-handler/pttp=CiscoPacketTracerPtsa-9.0.0.desktop
 video/mp4=firefox.desktop
+inode/directory=yazi.desktop

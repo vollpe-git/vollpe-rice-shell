@@ -23,7 +23,7 @@ PopupPanel {
     Rectangle {
         anchors.fill: parent
         color: theme.bg2
-        bottomLeftRadius: 50
+        bottomLeftRadius: 25
         bottomRightRadius: bottomLeftRadius
         Behavior on height {
             NumberAnimation {

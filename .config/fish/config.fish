@@ -8,7 +8,7 @@ fastfetch
 # Alias (In Fish gli alias creano automaticamente delle funzioni)
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias ff='fastfetch'
+alias ff='clear && fastfetch'
 alias apps='cat /home/vollpe/APPS.txt'
 
 # L'alias 'fuck' richiede una sintassi diversa in Fish per recuperare l'ultimo comando

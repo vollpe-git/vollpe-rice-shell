@@ -288,7 +288,7 @@ Item {
                                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                                     color: theme.red2
                                     Text {
-                                        font.family: theme.defualtFont
+                                        font.family: theme.defaultFont
                                         font.pixelSize: 15
                                         anchors.centerIn: parent
                                         font.bold: modelData.workspace?.id > 0

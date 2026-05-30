@@ -1,55 +1,58 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
   "logo":{
-      "source": "arch2",
+//       "source": "arch_small",
+      "source": "~/.config/fastfetch/arch_ascii_small.txt",
       "color":{
           "1": "red",
           "2": "red",
-      }
+      },
 //     "type": "kitty-direct",
 //     "source": "~/.config/fastfetch/kuromi.png",
-//     "padding": {
-//       "left": 5,
-//       "top": 3
-//     },
-    //"width": 30,
-    //"height": 30
+    "padding": {
+      "left": 2,
+//       "right": 2,
+      "top": 1,
+//       "bottom": 1
+    },
+//     "width": 30,
+//     "height": 30
   },
 
   "modules": [
     "title",
     "separator",
     "os",
-    "host",
-    "kernel",
+    //"host",
+    //"kernel",
     "uptime",
-    "packages",
-    "shell",
-    "display",
-    "de",
+    //"packages",
+    //"shell",
+    //"display",
+    //"de",
     "wm",
-    "wmtheme",
-    "theme",
-    "icons",
-    "font",
-    "cursor",
-    "terminal",
-    "terminalfont",
-    "cpu",
-    "gpu",
+    //"wmtheme",
+    //"theme",
+    //"icons",
+    //"font",
+    //"cursor",
+    //"terminal",
+    //"terminalfont",
+    //"cpu",
+    //"gpu",
     "memory",
-    "swap",
+    //"swap",
     "disk",
-    "localip",
-    "battery",
-    "poweradapter",
-    "locale",
-    "break",
-    "colors"
+    //"localip",
+    //"battery",
+    //"poweradapter",
+    //"locale",
+    //"break",
+    //"colors"
   ],
 
   "display": {
-    "color": "red"
+    "color":"red"
   }
 
   
