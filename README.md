@@ -81,6 +81,7 @@ This dotfiles configuration features a fully custom interface powered by **Quick
 * **Center:** **Hyprland** Workspace indicator.
 * **Right:** 
   * **Volume Slider:** Click icon to mute, click percentage to round to the nearest multiple of 5, scroll or drag to adjust volume by steps of 5.
+  * **Battery:** shows battery and time left to full or empty when hovering with mouse
   * **Bluetooth Menu:** Quick toggle and device settings popup.
   * **Network Settings:** Interface selection with Wi-Fi network scanning, connection, and disconnection management.
   * **Clock:** Current time and date.
