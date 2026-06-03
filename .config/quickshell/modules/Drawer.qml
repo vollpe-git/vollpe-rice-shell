@@ -18,6 +18,7 @@ WrapperItem {
     FastLaunch {}
     NetworkPopup {}
     BluetoothPopup {}
+    BatteryPopup {}
     BarModule {}
     Notes {}
     NotificationPanel {}

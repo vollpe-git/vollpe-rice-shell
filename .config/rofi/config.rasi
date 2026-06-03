@@ -37,7 +37,7 @@ window {
     location:       center;
     //y-offset:       calc(50% - 176px);
     width:          400;//350;
-    border-radius:  0px;
+    border-radius:  10px;
 
     background-color:   transparent;
 }

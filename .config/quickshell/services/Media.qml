@@ -43,7 +43,8 @@ Item {
         if (manualPlayer === player) {
             manualPlayer = null;
         } else {
-            togglePlay();
+            if(activePlayer.isPlaying)
+                togglePlay();
             manualPlayer = player;
         }
     }

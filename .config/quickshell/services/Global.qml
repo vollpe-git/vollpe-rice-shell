@@ -18,4 +18,7 @@ Singleton {
 
     property bool notificationPanelActive: false
     property int notificationPanelTab: 1
+    
+    property bool batteryPopupActive: true
+    property point batteryButtonPosition: Qt.point(0, 0)
 }

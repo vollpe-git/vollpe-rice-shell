@@ -19,40 +19,78 @@
 //     "height": 30
   },
 
-  "modules": [
-    "title",
-    "separator",
-    "os",
-    //"host",
-    //"kernel",
-    "uptime",
-    //"packages",
-    //"shell",
-    //"display",
-    //"de",
-    "wm",
-    //"wmtheme",
-    //"theme",
-    //"icons",
-    //"font",
-    //"cursor",
-    //"terminal",
-    //"terminalfont",
-    //"cpu",
-    //"gpu",
-    "memory",
-    //"swap",
-    "disk",
-    //"localip",
-    //"battery",
-    //"poweradapter",
-    //"locale",
-    //"break",
-    //"colors"
-  ],
+//   "modules": [
+//     "title",
+//     "separator",
+//     "os",
+//     //"host",
+//     //"kernel",
+//     "uptime",
+//     //"packages",
+//     //"shell",
+//     //"display",
+//     //"de",
+//     "wm",
+//     //"wmtheme",
+//     //"theme",
+//     //"icons",
+//     //"font",
+//     //"cursor",
+//     //"terminal",
+//     //"terminalfont",
+//     //"cpu",
+//     //"gpu",
+//     "memory",
+//     //"swap",
+//     "disk",
+//     //"localip",
+//     //"battery",
+//     //"poweradapter",
+//     //"locale",
+//     //"break",
+//     //"colors"
+//   ],
+
+"modules": [
+//     {
+//         "type": "title",
+//         "format": "  {#31}{user-name}  {#}->  {#31}{host-name}"
+//     },
+    {
+        "key": "╭───────────╮",
+        "type": "custom"
+    },
+    {
+        "key": "│  OS      │",
+        "type": "os"
+    },
+    {
+        "key": "│  wm      │",
+        "type": "wm"
+    },
+    {
+        "key": "│  uptime  │",
+        "type": "uptime"
+    },
+    {
+        "key": "│  age     │",
+        "type": "disk",
+        "folders": "/",
+        "format": "{days} days"
+    },
+    {
+        "key": "╰───────────╯",
+        "type": "custom"
+    },
+    {
+        "type": "custom",
+        "format": "{#bold_black}󱃓 {#bold_red}󱃓 {#bold_green}󱃓 {#bold_yellow}󱃓 {#bold_blue}󱃓 {#bold_magenta}󱃓 {#bold_cyan}󱃓 {#bold_white}󱃓 "
+    },
+],
 
   "display": {
-    "color":"red"
+    "color":"red",
+    "separator":" "
   }
 
   

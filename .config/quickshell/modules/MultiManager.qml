@@ -256,6 +256,7 @@ Item {
                             // 4. Definiamo una dimensione base per i delegati
                             // implicitWidth: 50
                             implicitHeight: 30
+                            visible: modelData.workspace?.name ?? false
 
                             // Se vuoi che occupino tutto lo spazio della cella
                             Layout.fillWidth: true
@@ -293,7 +294,7 @@ Item {
                                         anchors.centerIn: parent
                                         font.bold: modelData.workspace?.id > 0
                                         // Layout.alignment: Qt.AlignRight
-                                        text: modelData.workspace?.id > 0 ? modelData.workspace.name : ""
+                                        text: modelData.workspace?.id  > 0 ? modelData.workspace.name : ""
                                         color: theme.fg4
                                     }
                                 }

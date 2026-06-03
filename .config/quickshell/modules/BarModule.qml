@@ -545,7 +545,9 @@ WrapperItem {
                     color: theme.bg
                     Text{
                         text: {
-                            if(Battery.percentage > 80)
+                            if (Battery.charging)
+                                return "󱐋"
+                            else if(Battery.percentage > 80)
                                 return ""
                             else if(Battery.percentage > 60)
                                 return ""
@@ -570,6 +572,21 @@ WrapperItem {
                         color: theme.fg
                         font.family: theme.defaultFont
                         rightPadding: parent.radius / 2
+                    }
+                    MouseArea{
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onEntered: {
+                            var globalPos = parent.mapToGlobal(parent.width / 2, parent.height);
+                            Global.batteryPopupActive = true;
+                            Global.batteryButtonPosition = globalPos;
+                            //Global.batteryPopupActive = true;
+                            //var globalPos = parent.mapToGlobal(parent.width / 2, parent.height);
+                            //Global.batteryButtonPosition = globalPos;
+                        }
+                        onExited: {
+                            Global.batteryPopupActive = false;
+                        }
                     }
                 }
 
