@@ -32,14 +32,14 @@ Singleton {
         let min = Math.floor((totalSeconds % 3600) / 60);
         let sec = Math.floor(totalSeconds % 60);
         
-        let stringTime = "~";
-        if(boolHours) stringTime += `${hours}h`;
+        let stringTime = "";
+        if(boolHours && hours > 0) stringTime += `${hours}h`;
         //if(boolHours && boolMinutes || boolHours && boolSeconds) stringTime += ":";
-        if(boolMinutes) stringTime += `${min.toString().padStart(2, '0')}m`
+        if(boolMinutes && min > 0) stringTime += `${min.toString().padStart(2, '0')}m`
         //if(boolMinutes && boolSeconds) stringTime += ":";
-        if(boolSeconds) stringTime += `${sec.toString().padStart(2, '0')}s`;
+        if(boolSeconds && sec > 0) stringTime += `${sec.toString().padStart(2, '0')}s`;
         //return `${hours}:${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-        return stringTime;
+        return stringTime == "" ? "full" : stringTime;
     }
 
     function timeToFullString(boolHours = true, boolMinutes = true, boolSeconds = false) {
@@ -51,12 +51,12 @@ Singleton {
         let sec = Math.floor(totalSeconds % 60);
         
         let stringTime = "";
-        if(boolHours) stringTime += `${hours}`;
-        if(boolHours && boolMinutes || boolHours && boolSeconds) stringTime += ":";
-        if(boolMinutes) stringTime += `${min.toString().padStart(2, '0')}`
-        if(boolMinutes && boolSeconds) stringTime += ":";
-        if(boolSeconds) stringTime += sec.toString().padStart(2, '0');
+        if(boolHours && hours > 0) stringTime += `${hours}h`;
+        //if(boolHours && boolMinutes || boolHours && boolSeconds) stringTime += ":";
+        if(boolMinutes && min > 0) stringTime += `${min.toString().padStart(2, '0')}m`
+        //if(boolMinutes && boolSeconds) stringTime += ":";
+        if(boolSeconds && sec > 0) stringTime += `${sec.toString().padStart(2, '0')}s`;
         //return `${hours}:${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-        return stringTime;
+        return stringTime == "" ? "full" : stringTime;
     }
 }
